@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Mulish:wght@300;400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  body { margin: 0; background: #FAF7F0; }
+  * { box-sizing: border-box; }
+  a { color: #A62F55; }
+  a:hover { color: #C33F67; }
+</style>
+</helmet>
+<div style="--paper:#FAF7F0; --ivory:#EDE2DE; --olive:#4A4F3B; --ink:#292A24; --sage:#A2B18A; --olive-gray:#989E84; --peach:#F4AE8C; --rose:#CFA79F; --raspberry:#C33F67; --link:#A62F55; --border:#E2D9CC; --gutter:clamp(24px,5vw,80px); --font-display:'Cormorant Garamond',Georgia,serif; --font-body:'Mulish',system-ui,sans-serif; --font-script:'Pinyon Script',cursive; background:var(--paper); color:var(--ink); font-family:var(--font-body); font-weight:300; line-height:1.7; -webkit-font-smoothing:antialiased;">
+
+  <!-- ══════════ NAV (solid — interior page) ══════════ -->
+  <nav data-screen-label="nav" style="position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:center; gap:clamp(14px,2vw,34px); padding:6px 0.75in; background:var(--paper); box-shadow:0 1px 0 rgba(226,217,204,0.9); color:var(--olive); transition:background 400ms ease;">
+    <div class="lj-navlinks" style="display:flex; align-items:center; gap:clamp(14px,2vw,30px); flex:1; justify-content:space-between;">
+      <a href="The%20Weekend.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Weekend</a>
+      <a href="Explore.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Explore</a>
+      <a href="Travel%20%26%20Stay.dc.html" style="color:var(--raspberry); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap; border-bottom:1.5px solid var(--raspberry); padding-bottom:2px;">Stay</a>
+    </div>
+    <a href="Home.dc.html" aria-label="Home" style="flex:0 0 auto; display:inline-flex; align-items:center; margin:0 clamp(24px,3.2vw,56px);">
+      <img class="lj-navcrest" src="assets/nav-crest-lj.png" alt="Libby &amp; Josh" style="display:block; height:104px; width:auto;">
+    </a>
+    <div class="lj-navlinks" style="display:flex; align-items:center; gap:clamp(14px,2vw,30px); flex:1; justify-content:space-between;">
+      <a href="Registry.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Our Registry</a>
+      <a href="FAQ.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">FAQs</a>
+      <a href="RSVP.dc.html" style="color:var(--link); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">RSVP</a>
+    </div>
+    <div class="lj-navmobile" style="display:none; width:100%; align-items:center; justify-content:flex-end;">
+      <button type="button" aria-label="Open menu" onClick="{{ openMenu }}" style="background:transparent; border:none; padding:8px; display:inline-flex; flex-direction:column; gap:6px; cursor:pointer;">
+        <span style="display:block; width:26px; height:2px; background:var(--olive); border-radius:2px;"></span>
+        <span style="display:block; width:26px; height:2px; background:var(--olive); border-radius:2px;"></span>
+        <span style="display:block; width:26px; height:2px; background:var(--olive); border-radius:2px;"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div style="position:fixed; inset:0; z-index:80; background:var(--olive); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:clamp(18px,4vh,32px); padding:64px 24px; opacity:{{ menuOpacity }}; pointer-events:{{ menuPointer }}; transition:opacity 360ms ease;">
+    <button type="button" aria-label="Close menu" onClick="{{ closeMenu }}" style="position:absolute; top:18px; right:22px; background:transparent; border:none; cursor:pointer; width:40px; height:40px; color:var(--paper); font-size:30px; line-height:1;">×</button>
+    <a href="Home.dc.html" aria-label="Home" style="display:inline-flex; margin-bottom:12px;"><img src="assets/monogram.png" alt="Libby &amp; Josh" style="height:56px; width:auto; filter:brightness(0) invert(1); opacity:0.92;"></a>
+    <a href="The%20Weekend.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--peach); text-decoration:none;">Weekend</a>
+    <a href="Explore.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Explore</a>
+    <a href="Travel%20%26%20Stay.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Stay</a>
+    <a href="Registry.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Our Registry</a>
+    <a href="FAQ.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">FAQs</a>
+    <a href="RSVP.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">RSVP</a>
+  </div>
+
+
+  <header class="lj-mheader" data-screen-label="page header" style="position:relative; overflow:hidden; background:#A3B18A; color:var(--paper); padding:clamp(150px,15vw,220px) var(--gutter) clamp(96px,11vw,150px); text-align:center;">
+    <div style="position:absolute; inset:0; z-index:0;">
+      <image-slot id="stay-header-bg" src="assets/stay-header.png" shape="rect" fit="cover" placeholder="Drop a wide canyon / river-road photo for the header" style="display:block; width:100%; height:100%;"></image-slot>
+    </div>
+    <div aria-hidden="true" style="position:absolute; inset:0; z-index:1; background:linear-gradient(to bottom, rgba(41,42,36,0.55), rgba(41,42,36,0.35) 45%, rgba(74,79,59,0.9)); pointer-events:none;"></div>
+    <div style="position:relative; z-index:2;">
+      <div style="letter-spacing:0.36em; text-transform:uppercase; font-size:12px; font-weight:600; color:color-mix(in srgb, var(--paper) 82%, transparent); margin-bottom:26px;">Rest by the water</div>
+      <h1 style="font-family:var(--font-display); font-weight:500; font-size:clamp(52px,8vw,120px); line-height:0.95; margin:0 0 26px; color:var(--paper);">Travel &amp; Stay</h1>
+      <p style="font-family:var(--font-display); font-style:italic; font-size:clamp(20px,2.6vw,30px); line-height:1.4; color:color-mix(in srgb, var(--paper) 88%, transparent); max-width:42ch; margin:0 auto;">Getting to the canyon, where to lay your head, and everything to pack for a weekend on the Frio.</p>
+    </div>
+  </header>
+
+  <section data-screen-label="getting there" style="background:var(--paper); padding:clamp(72px,9vw,120px) var(--gutter);">
+    <div class="lj-split" style="max-width:1120px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(40px,6vw,90px); align-items:center;">
+      <div>
+        <div style="letter-spacing:0.3em; text-transform:uppercase; font-size:12px; font-weight:600; color:var(--olive-gray); margin-bottom:16px;">Finding us</div>
+        <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(34px,4.4vw,54px); line-height:1.02; margin:0 0 22px; color:var(--olive);">Getting to Rio Bella</h2>
+        <p style="font-size:16px; line-height:1.9; margin:0 0 30px; color:color-mix(in srgb,var(--ink) 84%,transparent); max-width:52ch;">Rio Bella Resort sits along the Frio River in Leakey, deep in the Texas Hill Country. It&rsquo;s an easy drive from either airport &mdash; the final stretch winds through Frio Canyon, so give yourself daylight if you can.</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px 30px;">
+          <div><div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:700; color:var(--olive-gray); margin-bottom:5px;">Address</div><div style="font-size:15px; color:var(--ink); line-height:1.6;">Rio Bella Resort<br>Leakey, Texas</div></div>
+          <div><div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:700; color:var(--olive-gray); margin-bottom:5px;">Nearest airports</div><div style="font-size:15px; color:var(--ink); line-height:1.6;">San Antonio (SAT) &middot; ~1 hr 45<br>Austin (AUS) &middot; ~2 hr 30</div></div>
+          <div><div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:700; color:var(--olive-gray); margin-bottom:5px;">From San Antonio</div><div style="font-size:15px; color:var(--ink); line-height:1.6;">About 95 miles northwest</div></div>
+          <div><div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:700; color:var(--olive-gray); margin-bottom:5px;">Parking</div><div style="font-size:15px; color:var(--ink); line-height:1.6;">Free on-site at the resort</div></div>
+        </div>
+      </div>
+      <div class="lj-mphoto" style="position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--ivory);">
+        <image-slot id="stay-map-photo" src="assets/stay-getting-there.jpeg" shape="rect" fit="cover" placeholder="Drop a map or a road-into-the-canyon photo" style="display:block; width:100%; height:100%;"></image-slot>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="on-site lodging" style="background:#A3B18A; color:var(--ink); padding:clamp(72px,9vw,120px) var(--gutter);">
+    <div class="lj-split" style="max-width:1120px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(40px,6vw,90px); align-items:center;">
+      <div class="lj-mphoto" style="position:relative; aspect-ratio:4/5; overflow:hidden; background:color-mix(in srgb,var(--olive) 20%,#A3B18A);">
+        <image-slot id="stay-cabin-photo" src="assets/stay-lodging.png" shape="rect" fit="cover" placeholder="Drop a Rio Bella cabin / riverside room photo" style="display:block; width:100%; height:100%;"></image-slot>
+      </div>
+      <div>
+        <div style="letter-spacing:0.3em; text-transform:uppercase; font-size:12px; font-weight:600; color:var(--ink); margin-bottom:16px;">Stay on the river</div>
+        <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(34px,4.4vw,54px); line-height:1.02; margin:0 0 22px; color:var(--olive);">Lodging at Rio Bella</h2>
+        <p style="font-size:16px; line-height:1.9; margin:0 0 22px; color:var(--ink); max-width:52ch;">We&rsquo;ve already arranged lodging for our guests at Rio Bella and two nearby cabins operated by the venue. Give Analisa a call to find out where you&rsquo;ll be staying and get everything you need for your weekend accommodations.</p>
+        <p style="font-family:var(--font-display); font-style:italic; font-size:20px; line-height:1.5; color:var(--ink); margin:0 0 30px;">For your lodging details, please contact Analisa, Rio Bella&rsquo;s Property Manager, below.</p>
+        <a href="tel:+18305918281" style="display:inline-block; background:var(--olive); color:var(--paper); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; padding:15px 40px; border-radius:999px;">Call Analisa</a>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="nearby stays" style="background:var(--paper); padding:clamp(72px,9vw,120px) var(--gutter);">
+    <div style="max-width:1240px; margin:0 auto;">
+      <div style="text-align:center; margin-bottom:clamp(40px,5vw,64px);">
+        <div style="letter-spacing:0.3em; text-transform:uppercase; font-size:12px; font-weight:600; color:var(--olive-gray); margin-bottom:14px;">More places to rest</div>
+        <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(32px,4.4vw,56px); line-height:1; margin:0; color:var(--olive);">Nearby stays</h2>
+      </div>
+      <div class="lj-cards3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(24px,3vw,40px);">
+        
+      <div style="display:flex; flex-direction:column;">
+        <div style="position:relative; aspect-ratio:4/3; overflow:hidden; background:var(--ivory); margin-bottom:20px;"><image-slot id="stay-near-1" src="assets/stay-near-1.jpg" shape="rect" fit="cover" placeholder="Drop a riverside cabin photo" style="display:block; width:100%; height:100%;"></image-slot></div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(24px,2.4vw,30px); line-height:1.05; margin:0 0 10px; color:var(--olive);">River Haven Cabins</h3>
+        <p style="font-size:15px; line-height:1.8; margin:0 0 12px; color:color-mix(in srgb,var(--ink) 82%,transparent);">A handful of cabin outfitters line the Frio near Leakey and Concan &mdash; many are a short drive from Rio Bella. Great for families booking together.</p>
+        <a href="https://www.riverhavencabins.com/" target="_blank" rel="noopener" style="font-size:14px; color:var(--link); text-decoration:none; border-bottom:1px solid color-mix(in srgb,var(--link) 40%,transparent); align-self:flex-start;">riverhavencabins.com</a>
+      </div>
+        
+      <div style="display:flex; flex-direction:column;">
+        <div style="position:relative; aspect-ratio:4/3; overflow:hidden; background:var(--ivory); margin-bottom:20px;"><image-slot id="stay-near-3" src="assets/stay-near-3.png" shape="rect" fit="cover" placeholder="Drop a Hill Country rental photo" style="display:block; width:100%; height:100%;"></image-slot></div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(24px,2.4vw,30px); line-height:1.05; margin:0 0 10px; color:var(--olive);">River Bluff Cabins</h3>
+        <p style="font-size:15px; line-height:1.8; margin:0 0 12px; color:color-mix(in srgb,var(--ink) 82%,transparent);">Vacation rentals and small lodges dot the canyon. Book early &mdash; November is a quieter but still popular season.</p>
+        <a href="https://riverbluffcabins.com/" target="_blank" rel="noopener" style="font-size:14px; color:var(--link); text-decoration:none; border-bottom:1px solid color-mix(in srgb,var(--link) 40%,transparent); align-self:flex-start;">riverbluffcabins.com</a>
+      </div>
+        
+      <div style="display:flex; flex-direction:column;">
+        <div style="position:relative; aspect-ratio:4/3; overflow:hidden; background:var(--ivory); margin-bottom:20px;"><image-slot id="stay-near-2" src="assets/stay-near-2.jpg" shape="rect" fit="cover" placeholder="Drop a camping / RV photo" style="display:block; width:100%; height:100%;"></image-slot></div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(24px,2.4vw,30px); line-height:1.05; margin:0 0 10px; color:var(--olive);">Camping &amp; RV (Optional)</h3>
+        <p style="font-size:15px; line-height:1.8; margin:0; color:color-mix(in srgb,var(--ink) 82%,transparent);">Garner State Park and the county campgrounds offer tent and RV sites for the adventurous, right on the water.</p>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="good to know" style="background:var(--ivory); padding:clamp(72px,9vw,120px) var(--gutter);">
+    <div style="max-width:1120px; margin:0 auto;">
+      <div style="text-align:center; margin-bottom:clamp(40px,5vw,60px);">
+        <div style="letter-spacing:0.3em; text-transform:uppercase; font-size:12px; font-weight:600; color:var(--olive-gray); margin-bottom:14px;">Before you pack</div>
+        <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(32px,4.4vw,52px); line-height:1; margin:0; color:var(--olive);">Good to know</h2>
+      </div>
+      <div class="lj-cards2" style="display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,4vw,56px);">
+        
+      <div>
+        <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:11px; font-weight:700; color:var(--raspberry); margin-bottom:10px;">November weather</div>
+        <p style="font-size:15px; line-height:1.8; margin:0; color:color-mix(in srgb,var(--ink) 84%,transparent);">Hill Country falls are mild &mdash; warm, sunny afternoons and cool evenings. Bring a layer for after dark by the river.</p>
+      </div>
+        
+      <div>
+        <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:11px; font-weight:700; color:var(--raspberry); margin-bottom:10px;">What to pack</div>
+        <p style="font-size:15px; line-height:1.8; margin:0; color:color-mix(in srgb,var(--ink) 84%,transparent);">Something for the water &mdash; river shoes, swimwear, a towel &mdash; alongside your wedding attire. Nights can dip, so pack a wrap or jacket. Bring hiking clothes if you plan to stay for the Sunday activities.</p>
+      </div>
+        
+      <div>
+        <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:11px; font-weight:700; color:var(--raspberry); margin-bottom:10px;">Cell service</div>
+        <p style="font-size:15px; line-height:1.8; margin:0; color:color-mix(in srgb,var(--ink) 84%,transparent);">Signal is spotty in the canyon. Download your directions before you leave the highway, and tell folks you may be off-grid for a bit.</p>
+      </div>
+        
+      <div>
+        <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:11px; font-weight:700; color:var(--raspberry); margin-bottom:10px;">Getting around</div>
+        <p style="font-size:15px; line-height:1.8; margin:0; color:color-mix(in srgb,var(--ink) 84%,transparent);">You&rsquo;ll want a car for the weekend. Everything centers on Rio Bella, but the nearest towns and shops are a short drive away.</p>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer data-screen-label="footer" style="background:var(--olive); color:var(--paper); padding:clamp(80px,11vw,130px) var(--gutter) 52px; text-align:center;">
+    <div style="max-width:920px; margin:0 auto;">
+      <img src="assets/monogram.png" alt="Libby &amp; Josh" style="height:clamp(96px,11vw,132px); width:auto; margin:0 auto 26px; display:block; filter:brightness(0) invert(1); opacity:0.94;">
+      <p style="font-family:var(--font-display); font-style:italic; font-size:clamp(22px,2.6vw,32px); line-height:1.4; color:color-mix(in srgb, var(--paper) 88%, transparent); margin:0 auto; max-width:36ch;">With love and a little river water<br>Libby &amp; Josh</p>
+      <div style="display:flex; align-items:center; justify-content:center; gap:16px; margin:clamp(44px,6vw,72px) 0 0;">
+        <span style="flex:0 0 60px; height:1px; background:color-mix(in srgb, var(--paper) 30%, transparent);"></span>
+        <span style="letter-spacing:0.28em; text-transform:uppercase; font-size:11px; font-weight:600; color:color-mix(in srgb, var(--paper) 62%, transparent);">November 7, 2026 · Rio Frio, Texas</span>
+        <span style="flex:0 0 60px; height:1px; background:color-mix(in srgb, var(--paper) 30%, transparent);"></span>
+      </div>
+    </div>
+  </footer>
+
+
+  <style>
+    @media (max-width: 900px) {
+      .lj-navmobile { position: absolute !important; right: 16px; top: 0; bottom: 0; width: auto !important; }
+      .lj-navcrest { height: 72px !important; }
+      .lj-mphoto { aspect-ratio: 4 / 3 !important; }
+      .lj-mheader { padding-top: 120px !important; padding-bottom: 64px !important; }
+      .lj-navlinks { display: none !important; }
+      .lj-navmobile { display: flex !important; }
+      .lj-split, .lj-cards3, .lj-cards2, .lj-faq { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menuOpen: false };
+  }
+
+  componentDidMount() { this.syncBodyLock(); }
+  componentDidUpdate() { this.syncBodyLock(); }
+  componentWillUnmount() { document.body.style.overflow = ''; }
+
+  syncBodyLock() {
+    document.body.style.overflow = this.state.menuOpen ? 'hidden' : '';
+  }
+
+  renderVals() {
+    return {
+      menuOpen: this.state.menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      menuOpacity: this.state.menuOpen ? 1 : 0,
+      menuPointer: this.state.menuOpen ? 'auto' : 'none'
+    };
+  }
+}
+</script>
+</body>
+</html>

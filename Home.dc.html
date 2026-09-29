@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Mulish:wght@300;400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  body { margin: 0; background: #FAF7F0; }
+  * { box-sizing: border-box; }
+  a { color: #A62F55; }
+  a:hover { color: #C33F67; }
+  @keyframes lj-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes lj-scrollcue { 0%,100% { transform: translateY(0); opacity: 0.85; } 50% { transform: translateY(7px); opacity: 0.35; } }
+</style>
+</helmet>
+<div style="--paper:#FAF7F0; --ivory:#EDE2DE; --olive:#4A4F3B; --ink:#292A24; --sage:#A2B18A; --olive-gray:#989E84; --peach:#F4AE8C; --rose:#CFA79F; --raspberry:#C33F67; --link:#A62F55; --border:#E2D9CC; --font-display:'Cormorant Garamond',Georgia,serif; --font-body:'Mulish',system-ui,sans-serif; --font-script:'Pinyon Script',cursive; background:var(--paper); color:var(--ink); font-family:var(--font-body); font-weight:300; line-height:1.7; -webkit-font-smoothing:antialiased;">
+
+
+  <!-- ══════════ NAV ══════════ -->
+  <nav data-screen-label="nav" style="position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:center; gap:clamp(14px,2vw,34px); padding:{{ navPad }}; background:{{ navBg }}; box-shadow:{{ navShadow }}; color:{{ navColor }}; transition:background 500ms ease, padding 500ms ease, color 300ms ease;">
+    <div class="lj-navlinks" style="display:flex; align-items:center; gap:clamp(14px,2vw,30px); flex:1; justify-content:space-between;">
+      <a href="The%20Weekend.dc.html" style="color:inherit; text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Weekend</a>
+      <a href="Explore.dc.html" style="color:inherit; text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Explore</a>
+      <a href="Travel%20%26%20Stay.dc.html" style="color:inherit; text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Stay</a>
+    </div>
+    <a href="Home.dc.html" aria-label="Home" style="flex:0 0 auto; display:inline-flex; align-items:center; margin:0 clamp(24px,3.2vw,56px);">
+      <img class="lj-navcrest" src="assets/nav-crest-lj.png" alt="Libby &amp; Josh" style="display:block; height:104px; width:auto; opacity:{{ brandOpacity }}; transition:opacity 400ms ease;">
+    </a>
+    <div class="lj-navlinks" style="display:flex; align-items:center; gap:clamp(14px,2vw,30px); flex:1; justify-content:space-between;">
+      <a href="Registry.dc.html" style="color:inherit; text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Our Registry</a>
+      <a href="FAQ.dc.html" style="color:inherit; text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">FAQs</a>
+      <a href="RSVP.dc.html" style="color:{{ rsvpColor }}; text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap; border-bottom:1.5px solid {{ rsvpColor }}; padding-bottom:2px;">RSVP</a>
+    </div>
+
+    <!-- Mobile bar -->
+    <div class="lj-navmobile" style="display:none; width:100%; align-items:center; justify-content:flex-end;">
+      <button type="button" aria-label="Open menu" onClick="{{ openMenu }}" style="background:transparent; border:none; padding:8px; display:inline-flex; flex-direction:column; gap:6px; cursor:pointer;">
+        <span style="display:block; width:26px; height:2px; background:{{ navColor }}; border-radius:2px;"></span>
+        <span style="display:block; width:26px; height:2px; background:{{ navColor }}; border-radius:2px;"></span>
+        <span style="display:block; width:26px; height:2px; background:{{ navColor }}; border-radius:2px;"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div style="position:fixed; inset:0; z-index:80; background:var(--olive); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:clamp(18px,4vh,32px); padding:64px 24px; opacity:{{ menuOpacity }}; pointer-events:{{ menuPointer }}; transition:opacity 360ms ease;">
+    <button type="button" aria-label="Close menu" onClick="{{ closeMenu }}" style="position:absolute; top:18px; right:22px; background:transparent; border:none; cursor:pointer; width:40px; height:40px; color:var(--paper); font-size:30px; line-height:1;">×</button>
+    <a href="Home.dc.html" aria-label="Home" style="display:inline-flex; margin-bottom:12px;"><img src="assets/monogram.png" alt="Libby &amp; Josh" style="height:56px; width:auto; filter:brightness(0) invert(1); opacity:0.92;"></a>
+    <a href="The%20Weekend.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Weekend</a>
+    <a href="Explore.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Explore</a>
+    <a href="Travel%20%26%20Stay.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Stay</a>
+    <a href="Registry.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Our Registry</a>
+    <a href="FAQ.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">FAQs</a>
+    <a href="RSVP.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--peach); text-decoration:none;">RSVP</a>
+  </div>
+
+  <!-- ══════════ HERO · River Cinematic ══════════ -->
+  <section id="top" data-screen-label="01 hero" style="position:relative; min-height:100vh; overflow:hidden; background:var(--olive); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; text-align:center; padding:0 24px clamp(72px,12vh,132px);">
+    <video ref="{{ videoRef }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" autoPlay="{{ true }}" preload="auto" poster="assets/river-poster.png" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;">
+      <source src="assets/river-loop.mp4?v=4" type="video/mp4">
+    </video>
+    <div aria-hidden="true" style="position:absolute; inset:0; z-index:1; background:linear-gradient(to bottom, rgba(41,42,36,{{ scrimTop }}) 0%, rgba(41,42,36,0.06) 38%, rgba(41,42,36,{{ scrimBottom }}) 100%); pointer-events:none;"></div>
+
+    <div style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:22px;">
+      <div style="letter-spacing:0.4em; text-transform:uppercase; font-size:12px; font-weight:600; color:color-mix(in srgb, var(--paper) 88%, transparent);">You&rsquo;re invited</div>
+      <h1 style="font-family:var(--font-display); font-weight:500; font-size:clamp(58px,11vw,150px); line-height:0.9; margin:0; color:var(--paper); text-shadow:0 2px 40px rgba(41,42,36,0.4);">Libby <span style="font-family:var(--font-script); font-weight:400; font-size:0.62em; vertical-align:0.04em;">&amp;</span> Josh</h1>
+      <div style="display:flex; align-items:center; gap:14px; letter-spacing:0.24em; text-transform:uppercase; font-size:clamp(11px,1.3vw,14px); font-weight:600; color:var(--paper); flex-wrap:wrap; justify-content:center;">
+        <span>November 7, 2026</span>
+        <span style="color:var(--peach);">·</span>
+        <span>Rio Bella Resort</span>
+        <span style="color:var(--peach);">·</span>
+        <span>Leakey, Texas</span>
+      </div>
+    </div>
+
+    <div aria-hidden="true" class="lj-scrollcue" style="position:absolute; left:50%; bottom:26px; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:color-mix(in srgb, var(--paper) 80%, transparent);">
+      <span style="font-family:var(--font-body); font-size:10px; letter-spacing:0.28em; text-transform:uppercase;">Scroll</span>
+      <span style="width:1px; height:34px; background:currentColor; animation:lj-scrollcue 2.4s ease-in-out infinite;"></span>
+    </div>
+  </section>
+
+  <!-- ══════════ CREST BRAND MOMENT + WELCOME ══════════ -->
+  <section data-screen-label="02 welcome" style="background:#f6efe3; padding:clamp(40px,5vw,64px) var(--gutter,32px) clamp(70px,10vw,120px); text-align:center;">
+    <p style="font-family:var(--font-display); font-size:clamp(24px,3.4vw,38px); line-height:1.42; color:var(--olive); max-width:22ch; margin:0 auto 40px;">We&rsquo;re getting married on the Frio!</p>
+    <img src="assets/home-watercolor-card-v2.png" alt="Libby and Josh — November 7, 2026 — Leakey, Texas" style="width:min(420px,78vw); height:auto; margin:0 auto 44px; display:block;">
+    <p style="font-size:clamp(16px,1.8vw,19px); line-height:1.85; color:color-mix(in srgb, var(--ink) 86%, transparent); max-width:52ch; margin:0 auto;">Join us November 7, 2026 at Rio Bella Resort in Leakey, Texas for a weekend beside the river — where cypress trees lean over clear water and the Hill Country slows everything down.</p>
+  </section>
+
+  <!-- ══════════ PHOTO ALBUM SLIDER ══════════ -->
+  <section data-screen-label="02b album" style="background:var(--ivory); padding:clamp(70px,9vw,120px) 0 clamp(60px,8vw,100px);">
+    <div style="max-width:1280px; margin:0 auto; padding:0 var(--gutter,32px); margin-bottom:clamp(28px,3.5vw,44px);">
+      <div style="letter-spacing:0.32em; text-transform:uppercase; font-size:12px; font-weight:600; color:var(--olive-gray); margin-bottom:14px;">A few of our favorite memories</div>
+      <h2 class="lj-album-title" style="font-family:var(--font-display); font-weight:500; font-size:clamp(32px,4.6vw,58px); line-height:1; margin:0; color:var(--olive);">Libby &amp; Josh through the years</h2>
+      <div class="lj-hint-desk" style="letter-spacing:0.32em; text-transform:uppercase; font-size:12px; font-weight:600; color:var(--olive-gray); font-size:10px; margin-top:16px;">Click and drag to view</div>
+      <div class="lj-hint-mob" style="letter-spacing:0.32em; text-transform:uppercase; font-size:12px; font-weight:600; color:var(--olive-gray); font-size:10px; margin-top:14px; display:none;">Swipe to view</div>
+    </div>
+    <div class="lj-album-mask" style="position:relative; overflow:hidden; cursor:grab; touch-action:pan-y; user-select:none; -webkit-user-select:none;">
+      <div class="lj-album-track" style="display:flex; gap:20px; width:max-content; padding:4px 0 20px; will-change:transform;">
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/07.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/21.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/14.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/03.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/29.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/11.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/25.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/01.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/18.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/32.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/09.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/05.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/27.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/16.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/22.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/12.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/30.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/02.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/19.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/08.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/26.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/15.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/04.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/31.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/10.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/23.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/17.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/06.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/28.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/13.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/20.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/24.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/07.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/21.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/14.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/03.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/29.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/11.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/25.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/01.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/18.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/32.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/09.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/05.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/27.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/16.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/22.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/12.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/30.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/02.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/19.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/08.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/26.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/15.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/04.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/31.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/10.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/23.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/17.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/06.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/28.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/13.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/20.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div style="flex:0 0 clamp(220px,26vw,340px); position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper);">
+          <img src="assets/album/24.jpg" alt="Libby &amp; Josh" loading="lazy" draggable="false" style="display:block; pointer-events:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ WIDE VENUE PHOTO ══════════ -->
+  <div style="position:relative; width:100%; height:clamp(240px,42vw,560px); overflow:hidden; background:var(--ivory);">
+    <image-slot id="home-venue-wide" shape="rect" fit="cover" placeholder="Drop a wide Frio River / Rio Bella venue photo" style="display:block; width:100%; height:100%;"></image-slot>
+  </div>
+
+  <!-- ══════════ WEEKEND TEASER ══════════ -->
+  <section data-screen-label="03 weekend teaser" style="background:var(--paper); padding:clamp(80px,11vw,140px) var(--gutter,32px);">
+    <div style="max-width:1280px; margin:0 auto;">
+      <div style="text-align:center; margin-bottom:clamp(48px,6vw,80px);">
+        <div style="letter-spacing:0.32em; text-transform:uppercase; font-size:12px; font-weight:600; color:var(--olive-gray); margin-bottom:16px;">Four days by the water</div>
+        <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(38px,5.4vw,72px); line-height:1; margin:0; color:var(--olive);">The Weekend</h2>
+      </div>
+      <div class="lj-teaser-grid" style="display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:clamp(24px,3vw,44px);">
+        <div style="display:flex; flex-direction:column;">
+          <div style="letter-spacing:0.28em; text-transform:uppercase; font-size:11px; font-weight:600; color:var(--raspberry); margin-bottom:10px;">Friday · Nov 6</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(26px,2.6vw,34px); line-height:1.05; margin:0 0 8px; color:var(--olive);">Welcome Party</h3>
+          <div style="font-family:var(--font-display); font-style:italic; font-size:18px; color:var(--olive-gray); margin-bottom:14px;">the arrival</div>
+          <div style="font-size:14px; line-height:1.7; color:color-mix(in srgb, var(--ink) 82%, transparent);">Ease into the weekend with a relaxed evening of BBQ, drinks and yard games to kick off the weekend.</div>
+          <div style="font-size:14px; line-height:1.7; margin-top:10px; color:color-mix(in srgb, var(--ink) 82%, transparent);">Attire &mdash; Texas Chic</div>
+        </div>
+        <div style="display:flex; flex-direction:column;">
+          <div style="letter-spacing:0.28em; text-transform:uppercase; font-size:11px; font-weight:600; color:var(--raspberry); margin-bottom:10px;">Saturday · Nov 7</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(26px,2.6vw,34px); line-height:1.05; margin:0 0 8px; color:var(--olive);">The Wedding</h3>
+          <div style="font-family:var(--font-display); font-style:italic; font-size:18px; color:var(--olive-gray); margin-bottom:14px;">we do</div>
+          <div style="font-size:14px; line-height:1.7; color:color-mix(in srgb, var(--ink) 82%, transparent);">Ceremony at 4:00 PM at Rio Bella Resort, followed by dinner and dancing under the trees. Black Tie Optional.</div>
+        </div>
+        
+          <div style="display:flex; flex-direction:column;">
+            <div style="letter-spacing:0.28em; text-transform:uppercase; font-size:11px; font-weight:600; color:var(--raspberry); margin-bottom:10px;">Sunday · Nov 8</div>
+            <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(26px,2.6vw,34px); line-height:1.05; margin:0 0 8px; color:var(--olive);">River Float</h3>
+            <div style="font-family:var(--font-display); font-style:italic; font-size:18px; color:var(--olive-gray); margin-bottom:14px;">slow sunday</div>
+            <div style="font-size:14px; line-height:1.7; color:color-mix(in srgb, var(--ink) 82%, transparent);">Breakfast and an easy float on the Frio before the road home. Times to come.</div>
+          </div>
+          <div style="display:flex; flex-direction:column;">
+            <div style="letter-spacing:0.28em; text-transform:uppercase; font-size:11px; font-weight:600; color:var(--raspberry); margin-bottom:10px;">Monday · Nov 9</div>
+            <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(26px,2.6vw,34px); line-height:1.05; margin:0 0 8px; color:var(--olive);">Send-off</h3>
+            <div style="font-family:var(--font-display); font-style:italic; font-size:18px; color:var(--olive-gray); margin-bottom:14px;">the goodbye</div>
+            <div style="font-size:14px; line-height:1.7; color:color-mix(in srgb, var(--ink) 82%, transparent);">Farewell breakfast and checkout before the road home. Times to come.</div>
+          </div>
+        
+      </div>
+      <div style="text-align:center; margin-top:clamp(48px,6vw,72px);">
+        <a href="The%20Weekend.dc.html" style="display:inline-block; background:var(--olive); color:var(--paper); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; padding:16px 44px; border-radius:999px;">See the full weekend</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer data-screen-label="06 footer" style="background:var(--olive); color:var(--paper); padding:clamp(80px,11vw,130px) var(--gutter,32px) 52px; text-align:center;">
+    <div style="max-width:920px; margin:0 auto;">
+      <img src="assets/monogram.png" alt="Libby &amp; Josh" style="height:clamp(96px,11vw,132px); width:auto; margin:0 auto 26px; display:block; filter:brightness(0) invert(1); opacity:0.94;">
+      <p style="font-family:var(--font-display); font-style:italic; font-size:clamp(22px,2.6vw,32px); line-height:1.4; color:color-mix(in srgb, var(--paper) 88%, transparent); margin:0 auto; max-width:36ch;">With love and a little river water<br>Libby &amp; Josh</p>
+      <div style="display:flex; align-items:center; justify-content:center; gap:16px; margin:clamp(44px,6vw,72px) 0 0;">
+        <span style="flex:0 0 60px; height:1px; background:color-mix(in srgb, var(--paper) 30%, transparent);"></span>
+        <span style="letter-spacing:0.28em; text-transform:uppercase; font-size:11px; font-weight:600; color:color-mix(in srgb, var(--paper) 62%, transparent);">November 7, 2026 · Rio Frio, Texas</span>
+        <span style="flex:0 0 60px; height:1px; background:color-mix(in srgb, var(--paper) 30%, transparent);"></span>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+    @media (max-width: 900px) {
+      .lj-hint-desk { display: none !important; }
+      .lj-hint-mob { display: block !important; }
+      .lj-album-title { font-size: 6.2vw !important; white-space: nowrap; }
+      .lj-navmobile { position: absolute !important; right: 16px; top: 0; bottom: 0; width: auto !important; }
+      .lj-navcrest { height: 72px !important; }
+      .lj-mphoto { aspect-ratio: 4 / 3 !important; }
+      .lj-mheader { padding-top: 120px !important; padding-bottom: 64px !important; }
+      .lj-navlinks { display: none !important; }
+      .lj-navmobile { display: flex !important; }
+      .lj-teaser-grid { grid-template-columns: 1fr !important; }
+    }
+    @media (max-height: 700px) {
+      .lj-scrollcue { display: none !important; }
+    }
+  </style>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { scrolled: false, menuOpen: false };
+    this.videoRef = React.createRef();
+  }
+
+
+
+  componentDidMount() {
+    this._onScroll = () => this.setState({ scrolled: window.scrollY > 80 });
+    this._onScroll();
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this.syncBodyLock();
+    const v = this.videoRef.current;
+    if (v) {
+      v.muted = true; v.defaultMuted = true; v.setAttribute('muted', '');
+      v.playsInline = true; v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', ''); v.setAttribute('autoplay', '');
+      const tryPlay = () => { if (!v.paused) return; const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+      const mobile = window.matchMedia && window.matchMedia('(max-width: 900px)').matches;
+      const useBlob = (url) => fetch(url).then(r => { if (!r.ok) throw 0; return r.blob(); }).then(b => {
+        if (this._vidUrl) URL.revokeObjectURL(this._vidUrl);
+        this._vidUrl = URL.createObjectURL(new Blob([b], { type: 'video/mp4' }));
+        v.src = this._vidUrl; try { v.load(); } catch (e) {} tryPlay();
+      });
+      if (mobile) {
+        let fellBack = false;
+        const fallback = () => { if (fellBack) return; fellBack = true; useBlob('assets/river-loop.mp4?v=4').catch(() => {}); };
+        v.addEventListener('error', fallback);
+        useBlob('assets/river-loop-mobile.mp4?v=1').catch(fallback);
+        setTimeout(() => { if (v.readyState < 2) fallback(); }, 9000);
+      } else {
+        try { v.load(); } catch (e) {}
+        tryPlay();
+      }
+      ['loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough'].forEach(ev => v.addEventListener(ev, tryPlay));
+      this._kick = () => tryPlay();
+      ['touchstart', 'touchend', 'scroll', 'click'].forEach(ev => window.addEventListener(ev, this._kick, { passive: true }));
+      document.addEventListener('visibilitychange', this._kick);
+      this._retry = setInterval(() => { if (!v.paused) clearInterval(this._retry); else tryPlay(); }, 800);
+      setTimeout(() => clearInterval(this._retry), 12000);
+    }
+    this.startAlbum();
+  }
+
+  startAlbum() {
+    const SPEED = 18; // px per second
+    let x = 0, last = performance.now(), drag = null, hold = 0, vel = 0;
+    const bind = () => {
+      const mask = document.querySelector('.lj-album-mask');
+      if (!mask || mask._ljBound) return mask;
+      mask._ljBound = true;
+      mask.addEventListener('pointerdown', (e) => {
+        drag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, x0: x, lx: e.clientX, lt: performance.now(), axis: e.pointerType === 'mouse' ? 'x' : null };
+        vel = 0; mask.style.cursor = 'grabbing';
+        if (drag.axis === 'x') mask.setPointerCapture(e.pointerId);
+      });
+      mask.addEventListener('pointermove', (e) => {
+        if (!drag || e.pointerId !== drag.id) return;
+        const dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
+        if (!drag.axis) {
+          if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+          drag.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+          if (drag.axis === 'y') { drag = null; return; }
+          mask.setPointerCapture(e.pointerId);
+        }
+        const now = performance.now();
+        vel = (e.clientX - drag.lx) / Math.max(1, now - drag.lt) * 1000;
+        drag.lx = e.clientX; drag.lt = now;
+        x = drag.x0 + dx;
+      });
+      const end = (e) => {
+        if (!drag || e.pointerId !== drag.id) return;
+        drag = null; hold = performance.now() + 1500; mask.style.cursor = 'grab';
+      };
+      mask.addEventListener('pointerup', end);
+      mask.addEventListener('pointercancel', end);
+      return mask;
+    };
+    const tick = (now) => {
+      const dt = Math.min(0.05, (now - last) / 1000); last = now;
+      const mask = bind();
+      const track = mask && mask.querySelector('.lj-album-track');
+      if (track) {
+        const half = track.scrollWidth / 2;
+        if (!drag) {
+          if (Math.abs(vel) > 5) { x += vel * dt; vel *= Math.pow(0.04, dt); }
+          else if (now > hold) x -= SPEED * dt;
+        }
+        if (half > 0) { while (x <= -half) { x += half; if (drag) drag.x0 += half; } while (x > 0) { x -= half; if (drag) drag.x0 -= half; } }
+        track.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+      }
+      this._albumRaf = requestAnimationFrame(tick);
+    };
+    this._albumRaf = requestAnimationFrame(tick);
+  }
+
+  componentDidUpdate() { this.syncBodyLock(); }
+
+  componentWillUnmount() {
+    if (this.albumTimer) clearInterval(this.albumTimer);
+    if (this._albumRaf) cancelAnimationFrame(this._albumRaf);
+    if (this._retry) clearInterval(this._retry);
+    if (this._kick) { ['touchstart', 'touchend', 'scroll', 'click'].forEach(ev => window.removeEventListener(ev, this._kick)); document.removeEventListener('visibilitychange', this._kick); }
+    window.removeEventListener('scroll', this._onScroll);
+    document.body.style.overflow = '';
+  }
+
+  syncBodyLock() {
+    document.body.style.overflow = this.state.menuOpen ? 'hidden' : '';
+  }
+
+
+  startAlbumAuto() {
+    if (this.albumTimer) return;
+    this.albumTimer = setInterval(() => {
+      if (this.albumHover) return;
+      const el = document.querySelector('.lj-album');
+      if (!el) return;
+      const max = el.scrollWidth - el.clientWidth - 4;
+      if (el.scrollLeft >= max) { el.scrollLeft = 0; return; }
+      this.slideAlbum(1);
+    }, 3400);
+  }
+
+  slideAlbum(dir) {
+    const el = (this.albumRef && this.albumRef.current) || document.querySelector('.lj-album');
+    if (!el) return;
+    const card = el.querySelector('[data-album-card]');
+    const step = card ? card.getBoundingClientRect().width + 20 : el.clientWidth * 0.8;
+    const from = el.scrollLeft;
+    const to = Math.max(0, Math.min(from + dir * step, el.scrollWidth - el.clientWidth));
+    const frames = 14;
+    for (let i = 1; i <= frames; i++) {
+      setTimeout(() => {
+        const p = i / frames;
+        el.scrollLeft = from + (to - from) * (1 - Math.pow(1 - p, 3));
+      }, i * 24);
+    }
+  }
+
+  renderVals() {
+    const overHero = true;
+    const solid = !overHero || this.state.scrolled;
+    return {
+
+      navBg: solid ? '#FAF7F0' : 'transparent',
+      navShadow: solid ? '0 1px 0 rgba(226,217,204,0.9)' : 'none',
+      navColor: solid ? '#4A4F3B' : '#FAF7F0',
+      navPad: solid ? '6px 0.75in' : '14px 0.75in',
+      logoH: solid ? '104px' : '132px',
+      brandOpacity: solid ? 1 : 0,
+      rsvpColor: solid ? '#A62F55' : '#F4AE8C',
+
+      scrimTop: 0.36,
+      scrimBottom: 0.58,
+
+      menuOpen: this.state.menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      menuOpacity: this.state.menuOpen ? 1 : 0,
+      menuPointer: this.state.menuOpen ? 'auto' : 'none',
+
+      videoRef: this.videoRef,
+
+      albumRef: this.albumRef || (this.albumRef = React.createRef()),
+      albumPrev: () => this.slideAlbum(-1),
+      albumNext: () => this.slideAlbum(1),
+      albumPause: () => {
+        const t = document.querySelector('.lj-album-track');
+        if (t) t.style.animationPlayState = 'paused';
+      },
+      albumResume: () => {
+        const t = document.querySelector('.lj-album-track');
+        if (t) t.style.animationPlayState = 'running';
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

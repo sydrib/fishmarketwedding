@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Mulish:wght@300;400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  body { margin: 0; background: #FAF7F0; }
+  * { box-sizing: border-box; }
+  a { color: #A62F55; }
+  a:hover { color: #C33F67; }
+</style>
+</helmet>
+<div style="--paper:#FAF7F0; --ivory:#EDE2DE; --olive:#4A4F3B; --ink:#292A24; --sage:#A2B18A; --olive-gray:#989E84; --peach:#F4AE8C; --rose:#CFA79F; --raspberry:#C33F67; --link:#A62F55; --border:#E2D9CC; --gutter:clamp(24px,5vw,80px); --font-display:'Cormorant Garamond',Georgia,serif; --font-body:'Mulish',system-ui,sans-serif; --font-script:'Pinyon Script',cursive; background:var(--paper); color:var(--ink); font-family:var(--font-body); font-weight:300; line-height:1.7; -webkit-font-smoothing:antialiased;">
+
+
+  <!-- ══════════ NAV (solid — interior page) ══════════ -->
+  <nav data-screen-label="nav" style="position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:center; gap:clamp(14px,2vw,34px); padding:6px 0.75in; background:var(--paper); box-shadow:0 1px 0 rgba(226,217,204,0.9); color:var(--olive); transition:background 400ms ease;">
+    <div class="lj-navlinks" style="display:flex; align-items:center; gap:clamp(14px,2vw,30px); flex:1; justify-content:space-between;">
+      <a href="The%20Weekend.dc.html" style="color:var(--raspberry); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap; border-bottom:1.5px solid var(--raspberry); padding-bottom:2px;">Weekend</a>
+      <a href="Explore.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Explore</a>
+      <a href="Travel%20%26%20Stay.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Stay</a>
+    </div>
+    <a href="Home.dc.html" aria-label="Home" style="flex:0 0 auto; display:inline-flex; align-items:center; margin:0 clamp(24px,3.2vw,56px);">
+      <img class="lj-navcrest" src="assets/nav-crest-lj.png" alt="Libby &amp; Josh" style="display:block; height:104px; width:auto;">
+    </a>
+    <div class="lj-navlinks" style="display:flex; align-items:center; gap:clamp(14px,2vw,30px); flex:1; justify-content:space-between;">
+      <a href="Registry.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Our Registry</a>
+      <a href="FAQ.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">FAQs</a>
+      <a href="RSVP.dc.html" style="color:var(--link); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">RSVP</a>
+    </div>
+    <div class="lj-navmobile" style="display:none; width:100%; align-items:center; justify-content:flex-end;">
+      <button type="button" aria-label="Open menu" onClick="{{ openMenu }}" style="background:transparent; border:none; padding:8px; display:inline-flex; flex-direction:column; gap:6px; cursor:pointer;">
+        <span style="display:block; width:26px; height:2px; background:var(--olive); border-radius:2px;"></span>
+        <span style="display:block; width:26px; height:2px; background:var(--olive); border-radius:2px;"></span>
+        <span style="display:block; width:26px; height:2px; background:var(--olive); border-radius:2px;"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div style="position:fixed; inset:0; z-index:80; background:var(--olive); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:clamp(18px,4vh,32px); padding:64px 24px; opacity:{{ menuOpacity }}; pointer-events:{{ menuPointer }}; transition:opacity 360ms ease;">
+    <button type="button" aria-label="Close menu" onClick="{{ closeMenu }}" style="position:absolute; top:18px; right:22px; background:transparent; border:none; cursor:pointer; width:40px; height:40px; color:var(--paper); font-size:30px; line-height:1;">×</button>
+    <a href="Home.dc.html" aria-label="Home" style="display:inline-flex; margin-bottom:12px;"><img src="assets/monogram.png" alt="Libby &amp; Josh" style="height:56px; width:auto; filter:brightness(0) invert(1); opacity:0.92;"></a>
+    <a href="The%20Weekend.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--peach); text-decoration:none;">Weekend</a>
+    <a href="Explore.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Explore</a>
+    <a href="Travel%20%26%20Stay.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Stay</a>
+    <a href="Registry.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Our Registry</a>
+    <a href="FAQ.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">FAQs</a>
+    <a href="RSVP.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">RSVP</a>
+  </div>
+
+  <!-- ══════════ PAGE HEADER ══════════ -->
+  <header class="lj-mheader" data-screen-label="page header" style="position:relative; overflow:hidden; background:#A3B18A; color:var(--paper); padding:clamp(150px,15vw,220px) var(--gutter) clamp(96px,11vw,150px); text-align:center;">
+    <div style="position:absolute; inset:0; z-index:0; overflow:hidden;">
+      <image-slot id="weekend-header-bg" src="assets/weekend-header-couple.jpeg" shape="rect" fit="cover" placeholder="Drop a wide river / venue photo for the header" style="display:block; position:absolute; top:0; left:0; width:100%; height:132%;"></image-slot>
+    </div>
+    <div aria-hidden="true" style="position:absolute; inset:0; z-index:1; background:linear-gradient(to bottom, rgba(41,42,36,0.55), rgba(41,42,36,0.35) 45%, rgba(74,79,59,0.9)); pointer-events:none;"></div>
+    <div style="position:relative; z-index:2;">
+      <div style="letter-spacing:0.36em; text-transform:uppercase; font-size:12px; font-weight:600; color:color-mix(in srgb, var(--paper) 82%, transparent); margin-bottom:26px;">Four days by the water</div>
+      <h1 style="font-family:var(--font-display); font-weight:500; font-size:clamp(52px,8vw,120px); line-height:0.95; margin:0 0 26px; color:var(--paper);">The Weekend</h1>
+      <p style="font-family:var(--font-display); font-style:italic; font-size:clamp(20px,2.6vw,30px); line-height:1.4; color:color-mix(in srgb, var(--paper) 88%, transparent); max-width:36ch; margin:0 auto;">A welcome party, the wedding, and a slow Sunday in the Hill Country. Here&rsquo;s how the weekend unfolds.</p>
+    </div>
+  </header>
+
+  <!-- ══════════ JUMP-TO-DAY BAR ══════════ -->
+  <nav aria-label="Jump to a day" data-screen-label="day nav" style="position:sticky; top:58px; z-index:50; background:color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border-bottom:1px solid var(--border);">
+    <div style="max-width:1240px; margin:0 auto; display:flex; align-items:stretch; justify-content:center; gap:clamp(6px,4vw,64px); padding:0 var(--gutter);">
+      <a href="#friday" style="flex:0 1 auto; text-align:center; text-decoration:none; padding:16px 6px; border-bottom:2px solid transparent; color:var(--olive);" style-hover="border-bottom-color:var(--raspberry);">
+        <div style="font-family:var(--font-display); font-size:clamp(20px,2.2vw,27px); line-height:1; color:var(--raspberry);">Friday</div>
+        <div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:600; color:var(--olive-gray); margin-top:5px;">Nov 6 · Welcome</div>
+      </a>
+      <a href="#saturday" style="flex:0 1 auto; text-align:center; text-decoration:none; padding:16px 6px; border-bottom:2px solid transparent; color:var(--olive);" style-hover="border-bottom-color:var(--raspberry);">
+        <div style="font-family:var(--font-display); font-size:clamp(20px,2.2vw,27px); line-height:1; color:var(--raspberry);">Saturday</div>
+        <div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:600; color:var(--olive-gray); margin-top:5px;">Nov 7 · Wedding</div>
+      </a>
+      
+        <a href="#sunday" style="flex:0 1 auto; text-align:center; text-decoration:none; padding:16px 6px; border-bottom:2px solid transparent; color:var(--olive);" style-hover="border-bottom-color:var(--raspberry);">
+          <div style="font-family:var(--font-display); font-size:clamp(20px,2.2vw,27px); line-height:1; color:var(--raspberry);">Sunday</div>
+          <div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:600; color:var(--olive-gray); margin-top:5px;">Nov 8 · Float</div>
+        </a>
+        <a href="#monday" style="flex:0 1 auto; text-align:center; text-decoration:none; padding:16px 6px; border-bottom:2px solid transparent; color:var(--olive);" style-hover="border-bottom-color:var(--raspberry);">
+          <div style="font-family:var(--font-display); font-size:clamp(20px,2.2vw,27px); line-height:1; color:var(--raspberry);">Monday</div>
+          <div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:600; color:var(--olive-gray); margin-top:5px;">Nov 9 · Farewell</div>
+        </a>
+      
+    </div>
+  </nav>
+
+  <!-- ══════════ FRIDAY ══════════ -->
+  <section id="friday" data-screen-label="friday" style="background:var(--paper); padding:clamp(72px,9vw,130px) var(--gutter);">
+    <div class="lj-day" style="display:grid; grid-template-columns:minmax(0,360px) minmax(0,1fr); gap:clamp(40px,6vw,96px); align-items:center; max-width:1240px; margin:0 auto;">
+      <div class="lj-day-id" style="position:sticky; top:108px;">
+        <div style="font-family:var(--font-script); font-size:clamp(46px,5vw,66px); color:var(--raspberry); line-height:0.9;">Friday</div>
+        <div style="letter-spacing:0.24em; text-transform:uppercase; font-size:12px; font-weight:600; color:var(--olive-gray); margin:16px 0 18px;">November 6, 2026</div>
+        <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(30px,3.4vw,42px); line-height:1.05; margin:0 0 16px; color:var(--olive);">Welcome Party</h2>
+        <p style="font-size:16px; line-height:1.9; margin:0 0 26px; color:color-mix(in srgb, var(--ink) 84%, transparent);">Ease into the weekend with a relaxed evening of BBQ, drinks and yard games to kick off the weekend.</p>
+        <div class="lj-mphoto" style="position:relative; aspect-ratio:5/6; overflow:hidden; background:var(--ivory); margin-bottom:24px;">
+          <image-slot id="weekend-friday-photo" shape="rect" fit="cover" placeholder="Drop a Friday / welcome-party photo" style="display:block; width:100%; height:100%;"></image-slot>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:16px 30px;">
+          <div><div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:700; color:var(--olive-gray); margin-bottom:4px;">Attire</div><div style="font-size:14px; color:var(--ink);">Texas Chic</div></div>
+          <div><div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:700; color:var(--olive-gray); margin-bottom:4px;">Where</div><div style="font-size:14px; color:var(--ink);">Rio Bella Resort</div></div>
+          <div><div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:700; color:var(--olive-gray); margin-bottom:4px;">Mood Board</div><div style="font-size:14px;"><a href="https://www.pinterest.com/sydneyribelin77/texas-chic-mood-board/" target="_blank" rel="noopener" style="color:var(--raspberry); text-decoration:underline; text-underline-offset:3px; display:inline-block; padding:13px 0; margin:-13px 0;">Click Here</a></div></div>
+        </div>
+      </div>
+      <div class="lj-timeline" style="padding-top:6px; margin-top:120px;">
+        <div style="position:relative; padding:0 0 clamp(30px,3.4vw,44px) clamp(28px,3vw,42px); border-left:2px solid var(--border);">
+          <span style="position:absolute; left:-9px; top:2px; width:16px; height:16px; border-radius:50%; background:var(--paper); border:2px solid var(--raspberry);"></span>
+          <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:12px; font-weight:700; color:var(--raspberry); margin-bottom:7px;">12:00 PM</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(22px,2.3vw,29px); line-height:1.1; margin:0 0 8px; color:var(--olive);">Check-in</h3>
+          <p style="font-size:15px; line-height:1.8; max-width:46ch; margin:0; color:color-mix(in srgb, var(--ink) 80%, transparent);">Settle into your cabin or room at Rio Bella and trade the highway for Hill Country time.</p>
+        </div>
+        <div style="position:relative; padding:0 0 clamp(30px,3.4vw,44px) clamp(28px,3vw,42px); border-left:2px solid var(--border);">
+          <span style="position:absolute; left:-9px; top:2px; width:16px; height:16px; border-radius:50%; background:var(--paper); border:2px solid var(--raspberry);"></span>
+          <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:12px; font-weight:700; color:var(--raspberry); margin-bottom:7px;">5:00 PM &ndash; 8:00 PM</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(22px,2.3vw,29px); line-height:1.1; margin:0 0 8px; color:var(--olive);">Welcome Party</h3>
+          <p style="font-size:15px; line-height:1.8; max-width:46ch; margin:0; color:color-mix(in srgb, var(--ink) 80%, transparent);">Welcome drinks, something to eat, and the first hellos of the weekend! Attire is Texas Chic.</p>
+        </div>
+        <div style="position:relative; padding:0 0 4px clamp(28px,3vw,42px); border-left:2px solid transparent;">
+          <span style="position:absolute; left:-9px; top:2px; width:16px; height:16px; border-radius:50%; background:var(--paper); border:2px solid var(--raspberry);"></span>
+          <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:12px; font-weight:700; color:var(--raspberry); margin-bottom:7px;">Later</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(22px,2.3vw,29px); line-height:1.1; margin:0 0 8px; color:var(--olive);">Fireside Nightcap</h3>
+          <p style="font-size:15px; line-height:1.8; max-width:46ch; margin:0; color:color-mix(in srgb, var(--ink) 80%, transparent);">Linger by the water with a last drink before an early night.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ SATURDAY ══════════ -->
+  <section id="saturday" data-screen-label="saturday" style="background:#A3B18A; color:var(--ink); padding:clamp(72px,9vw,130px) var(--gutter);">
+    <div class="lj-day" style="display:grid; grid-template-columns:minmax(0,360px) minmax(0,1fr); gap:clamp(40px,6vw,96px); align-items:center; max-width:1240px; margin:0 auto;">
+      <div class="lj-day-id" style="position:sticky; top:108px;">
+        <div style="font-family:var(--font-script); font-size:clamp(46px,5vw,66px); color:var(--olive); line-height:0.9;">Saturday</div>
+        <div style="letter-spacing:0.24em; text-transform:uppercase; font-size:12px; font-weight:600; color:var(--ink); margin:16px 0 18px;">November 7, 2026</div>
+        <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(30px,3.4vw,42px); line-height:1.05; margin:0 0 16px; color:var(--olive);">The Wedding</h2>
+        <p style="font-size:16px; line-height:1.9; margin:0 0 26px; color:var(--ink);">The heart of the weekend — we gather beside the Frio, then celebrate with dinner, toasts, and dancing under the trees.</p>
+        <div class="lj-mphoto" style="position:relative; aspect-ratio:5/6; overflow:hidden; background:color-mix(in srgb, var(--olive) 20%, #A3B18A); margin-bottom:24px;">
+          <image-slot id="weekend-saturday-photo" shape="rect" fit="cover" placeholder="Drop a Saturday / ceremony photo" style="display:block; width:100%; height:100%;"></image-slot>
+        </div>
+        <div style="display:flex; flex-wrap:nowrap; justify-content:space-between; gap:16px 18px;">
+          <div><div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:700; color:var(--ink); margin-bottom:4px;">Attire</div><div style="font-size:14px; color:var(--ink); white-space:nowrap;">Black Tie Optional</div></div>
+          <div><div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:700; color:var(--ink); margin-bottom:4px;">Where</div><div style="font-size:14px; color:var(--ink);">Rio Bella Resort</div></div>
+          <div><div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:700; color:var(--ink); margin-bottom:4px;">Mood Board</div><div style="font-size:14px;"><a href="https://www.pinterest.com/sydneyribelin77/black-tie-optional/" target="_blank" rel="noopener" style="color:var(--ink); text-decoration:underline; text-underline-offset:3px; display:inline-block; padding:13px 0; margin:-13px 0;">Click Here</a></div></div>
+        </div>
+      </div>
+      <div class="lj-timeline" style="padding-top:6px;">
+        <div style="position:relative; padding:0 0 clamp(30px,3.4vw,44px) clamp(28px,3vw,42px); border-left:2px solid color-mix(in srgb, var(--olive) 34%, transparent);">
+          <span style="position:absolute; left:-9px; top:2px; width:16px; height:16px; border-radius:50%; background:#A3B18A; border:2px solid var(--olive);"></span>
+          <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:12px; font-weight:700; color:var(--ink); margin-bottom:7px;">3:30 PM</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(22px,2.3vw,29px); line-height:1.1; margin:0 0 8px; color:var(--olive);">Guests Arrive</h3>
+          <p style="font-size:15px; line-height:1.8; max-width:46ch; margin:0; color:var(--ink);">Find your seats beside the river as the afternoon light settles over the water.</p>
+        </div>
+        <div style="position:relative; padding:0 0 clamp(30px,3.4vw,44px) clamp(28px,3vw,42px); border-left:2px solid color-mix(in srgb, var(--olive) 34%, transparent);">
+          <span style="position:absolute; left:-9px; top:2px; width:16px; height:16px; border-radius:50%; background:var(--olive); border:2px solid var(--olive);"></span>
+          <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:12px; font-weight:700; color:var(--ink); margin-bottom:7px;">4:00 PM</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(24px,2.6vw,33px); line-height:1.1; margin:0 0 8px; color:var(--olive);">The Ceremony</h3>
+          <p style="font-size:15px; line-height:1.8; max-width:46ch; margin:0; color:var(--ink);">We say I do on the banks of the Frio, surrounded by the people we love most.</p>
+        </div>
+        <div style="position:relative; padding:0 0 clamp(30px,3.4vw,44px) clamp(28px,3vw,42px); border-left:2px solid color-mix(in srgb, var(--olive) 34%, transparent);">
+          <span style="position:absolute; left:-9px; top:2px; width:16px; height:16px; border-radius:50%; background:#A3B18A; border:2px solid var(--olive);"></span>
+          <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:12px; font-weight:700; color:var(--ink); margin-bottom:7px;">4:30 PM</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(22px,2.3vw,29px); line-height:1.1; margin:0 0 8px; color:var(--olive);">Cocktail Hour</h3>
+          <p style="font-size:15px; line-height:1.8; max-width:46ch; margin:0; color:var(--ink);">Toast the newlyweds over drinks and passed bites while the sun drops low.</p>
+        </div>
+        <div style="position:relative; padding:0 0 clamp(30px,3.4vw,44px) clamp(28px,3vw,42px); border-left:2px solid color-mix(in srgb, var(--olive) 34%, transparent);">
+          <span style="position:absolute; left:-9px; top:2px; width:16px; height:16px; border-radius:50%; background:#A3B18A; border:2px solid var(--olive);"></span>
+          <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:12px; font-weight:700; color:var(--ink); margin-bottom:7px;">6:00 PM – 7:30 PM</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(22px,2.3vw,29px); line-height:1.1; margin:0 0 8px; color:var(--olive);">Dinner, Dances &amp; Speeches</h3>
+          <p style="font-size:15px; line-height:1.8; max-width:46ch; margin:0; color:var(--ink);">Dinner under the trees, followed by special dances and a few words from our favorite people.</p>
+        </div>
+        <div style="position:relative; padding:0 0 clamp(30px,3.4vw,44px) clamp(28px,3vw,42px); border-left:2px solid color-mix(in srgb, var(--olive) 34%, transparent);">
+          <span style="position:absolute; left:-9px; top:2px; width:16px; height:16px; border-radius:50%; background:#A3B18A; border:2px solid var(--olive);"></span>
+          <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:12px; font-weight:700; color:var(--ink); margin-bottom:7px;">8:00 PM – 10:45 PM</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(22px,2.3vw,29px); line-height:1.1; margin:0 0 8px; color:var(--olive);">Party Time</h3>
+          <p style="font-size:15px; line-height:1.8; max-width:46ch; margin:0; color:var(--ink);">The band starts and we dance under the string lights well into the night.</p>
+        </div>
+        <div style="position:relative; padding:0 0 4px clamp(28px,3vw,42px); border-left:2px solid transparent;">
+          <span style="position:absolute; left:-9px; top:2px; width:16px; height:16px; border-radius:50%; background:#A3B18A; border:2px solid var(--olive);"></span>
+          <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:12px; font-weight:700; color:var(--ink); margin-bottom:7px;">11:00 PM – Late</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(22px,2.3vw,29px); line-height:1.1; margin:0 0 8px; color:var(--olive);">After Party</h3>
+          <p style="font-size:15px; line-height:1.8; max-width:46ch; margin:0; color:var(--ink);">Keep the night going for those not ready to call it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════ SUNDAY ══════════ -->
+  
+  <section id="sunday" data-screen-label="sunday" style="background:var(--ivory); padding:clamp(72px,9vw,130px) var(--gutter);">
+    <div class="lj-day" style="display:grid; grid-template-columns:minmax(0,360px) minmax(0,1fr); gap:clamp(40px,6vw,96px); align-items:center; max-width:1240px; margin:0 auto;">
+      <div class="lj-day-id" style="position:sticky; top:108px;">
+        <div style="font-family:var(--font-script); font-size:clamp(46px,5vw,66px); color:var(--raspberry); line-height:0.9;">Sunday</div>
+        <div style="letter-spacing:0.24em; text-transform:uppercase; font-size:12px; font-weight:600; color:var(--olive-gray); margin:16px 0 18px;">November 8, 2026</div>
+        <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(30px,3.4vw,42px); line-height:1.05; margin:0 0 16px; color:var(--olive);">Enjoy the Texas Hill Country</h2>
+        <p style="font-size:16px; line-height:1.9; margin:0 0 26px; color:color-mix(in srgb, var(--ink) 84%, transparent);">A slow Sunday recovery day enjoying the beautiful surrounding landscape. If weather allows, we&rsquo;d love it if you joined us for a float down the Frio!</p>
+        <p style="font-size:16px; line-height:1.9; margin:-14px 0 26px; color:color-mix(in srgb, var(--ink) 84%, transparent);">Alternative activity will be an easy hike through Garner State Park.</p>
+        <div class="lj-mphoto" style="position:relative; aspect-ratio:5/6; overflow:hidden; background:var(--paper); margin-bottom:24px;">
+          <image-slot id="weekend-sunday-photo" src="assets/river-sendoff.jpeg" shape="rect" fit="cover" placeholder="Drop a Sunday / river-float photo" style="display:block; width:100%; height:100%;"></image-slot>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:16px 30px;">
+          <div><div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:700; color:var(--olive-gray); margin-bottom:4px;">Attire</div><div style="font-size:14px; color:var(--ink);">Casual · swimwear or hiking attire</div></div>
+          <div><div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:700; color:var(--olive-gray); margin-bottom:4px;">Where</div><div style="font-size:14px; color:var(--ink);">Rio Bella Resort</div></div>
+        </div>
+      </div>
+      <div class="lj-timeline" style="padding-top:6px;">
+        <div style="position:relative; padding:0 0 clamp(30px,3.4vw,44px) clamp(28px,3vw,42px); border-left:2px solid var(--border);">
+          <span style="position:absolute; left:-9px; top:2px; width:16px; height:16px; border-radius:50%; background:var(--ivory); border:2px solid var(--raspberry);"></span>
+          <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:12px; font-weight:700; color:var(--raspberry); margin-bottom:7px;">Morning · Time TBA</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(22px,2.3vw,29px); line-height:1.1; margin:0 0 8px; color:var(--olive);">Breakfast</h3>
+          <p style="font-size:15px; line-height:1.8; max-width:46ch; margin:0; color:color-mix(in srgb, var(--ink) 80%, transparent);">A casual breakfast, plenty of coffee, and a chance to recover before the day begins.</p>
+        </div>
+        <div style="position:relative; padding:0 0 clamp(30px,3.4vw,44px) clamp(28px,3vw,42px); border-left:2px solid var(--border);">
+          <span style="position:absolute; left:-9px; top:2px; width:16px; height:16px; border-radius:50%; background:var(--ivory); border:2px solid var(--raspberry);"></span>
+          <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:12px; font-weight:700; color:var(--raspberry); margin-bottom:7px;">Midday</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(22px,2.3vw,29px); line-height:1.1; margin:0 0 8px; color:var(--olive);">River Float / Garner State Park</h3>
+          <p style="font-size:15px; line-height:1.8; max-width:46ch; margin:0; color:color-mix(in srgb, var(--ink) 80%, transparent);">Spend the afternoon exploring the Hill Country &mdash; by tube on the Frio, or on foot through Garner State Park.</p>
+        </div>
+        <div style="position:relative; padding:0 0 4px clamp(28px,3vw,42px); border-left:2px solid transparent;">
+          <span style="position:absolute; left:-9px; top:2px; width:16px; height:16px; border-radius:50%; background:var(--ivory); border:2px solid var(--raspberry);"></span>
+          <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:12px; font-weight:700; color:var(--raspberry); margin-bottom:7px;">Evening</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(22px,2.3vw,29px); line-height:1.1; margin:0 0 8px; color:var(--olive);">Dinner at Bent Rim Grill</h3>
+          <p style="font-size:15px; line-height:1.8; max-width:46ch; margin:0; color:color-mix(in srgb, var(--ink) 80%, transparent);">A relaxed evening at Bent Rim Grill to cap the weekend together.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ MONDAY ══════════ -->
+  <section id="monday" data-screen-label="monday" data-lj-full="1" style="background:var(--paper); padding:clamp(72px,9vw,130px) var(--gutter);">
+    <div class="lj-day" style="display:grid; grid-template-columns:minmax(0,360px) minmax(0,1fr); gap:clamp(40px,6vw,96px); align-items:center; max-width:1240px; margin:0 auto;">
+      <div class="lj-day-id" style="position:sticky; top:108px;">
+        <div style="font-family:var(--font-script); font-size:clamp(46px,5vw,66px); color:var(--raspberry); line-height:0.9;">Monday</div>
+        <div style="letter-spacing:0.24em; text-transform:uppercase; font-size:12px; font-weight:600; color:var(--olive-gray); margin:16px 0 18px;">November 9, 2026</div>
+        <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(30px,3.4vw,42px); line-height:1.05; margin:0 0 16px; color:var(--olive);">Farewell</h2>
+        <p style="font-size:16px; line-height:1.9; margin:0 0 26px; color:color-mix(in srgb, var(--ink) 84%, transparent);">One last breakfast together before the road home. No rush — just coffee, goodbyes, and safe travels.</p>
+        <div class="lj-mphoto" style="position:relative; aspect-ratio:5/6; overflow:hidden; background:var(--ivory); margin-bottom:24px;">
+          <image-slot id="weekend-monday-photo" shape="rect" fit="cover" placeholder="Drop a Monday / farewell photo" style="display:block; width:100%; height:100%;"></image-slot>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:16px 30px;">
+          <div><div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:700; color:var(--olive-gray); margin-bottom:4px;">Checkout</div><div style="font-size:14px; color:var(--ink);">11 AM</div></div>
+          <div><div style="letter-spacing:0.16em; text-transform:uppercase; font-size:10px; font-weight:700; color:var(--olive-gray); margin-bottom:4px;">Where</div><div style="font-size:14px; color:var(--ink);">Rio Bella Resort</div></div>
+        </div>
+      </div>
+      <div class="lj-timeline" style="padding-top:6px;">
+        <div style="position:relative; padding:0 0 clamp(30px,3.4vw,44px) clamp(28px,3vw,42px); border-left:2px solid var(--border);">
+          <span style="position:absolute; left:-9px; top:2px; width:16px; height:16px; border-radius:50%; background:var(--paper); border:2px solid var(--raspberry);"></span>
+          <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:12px; font-weight:700; color:var(--raspberry); margin-bottom:7px;">8 AM – 10 AM</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(22px,2.3vw,29px); line-height:1.1; margin:0 0 8px; color:var(--olive);">Farewell Breakfast</h3>
+          <p style="font-size:15px; line-height:1.8; max-width:46ch; margin:0; color:color-mix(in srgb, var(--ink) 80%, transparent);">An easy spread to slow the goodbye — coffee, a bite, and a little more time together.</p>
+        </div>
+        <div style="position:relative; padding:0 0 4px clamp(28px,3vw,42px); border-left:2px solid transparent;">
+          <span style="position:absolute; left:-9px; top:2px; width:16px; height:16px; border-radius:50%; background:var(--paper); border:2px solid var(--raspberry);"></span>
+          <div style="letter-spacing:0.18em; text-transform:uppercase; font-size:12px; font-weight:700; color:var(--raspberry); margin-bottom:7px;">11 AM</div>
+          <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(22px,2.3vw,29px); line-height:1.1; margin:0 0 8px; color:var(--olive);">Checkout</h3>
+          <p style="font-size:15px; line-height:1.8; max-width:46ch; margin:0; color:color-mix(in srgb, var(--ink) 80%, transparent);">Safe travels — check-out and hugs all around. Thank you so much for celebrating with us!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- ══════════ NOTE + CTA ══════════ -->
+  <section data-screen-label="note" style="background:var(--paper); padding:clamp(44px,5vw,68px) var(--gutter); text-align:center;">
+    <div style="max-width:640px; margin:0 auto;">
+      <div style="letter-spacing:0.3em; text-transform:uppercase; font-size:12px; font-weight:600; color:var(--olive-gray); margin-bottom:12px;">A note on the weekend</div>
+      <p style="font-family:var(--font-display); font-size:clamp(19px,2vw,24px); line-height:1.45; color:var(--olive); margin:0 0 24px;">We&rsquo;ll send updates as we lock in specific times and details. Everything happens at Rio Bella Resort unless we tell you otherwise.</p>
+      <a href="Explore.dc.html" style="display:inline-block; background:var(--olive); color:var(--paper); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; padding:13px 36px; border-radius:999px;">Explore</a>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer data-screen-label="footer" style="background:var(--olive); color:var(--paper); padding:clamp(80px,11vw,130px) var(--gutter) 52px; text-align:center;">
+    <div style="max-width:920px; margin:0 auto;">
+      <img src="assets/monogram.png" alt="Libby &amp; Josh" style="height:clamp(96px,11vw,132px); width:auto; margin:0 auto 26px; display:block; filter:brightness(0) invert(1); opacity:0.94;">
+      <p style="font-family:var(--font-display); font-style:italic; font-size:clamp(22px,2.6vw,32px); line-height:1.4; color:color-mix(in srgb, var(--paper) 88%, transparent); margin:0 auto; max-width:36ch;">With love and a little river water<br>Libby &amp; Josh</p>
+      <div style="display:flex; align-items:center; justify-content:center; gap:16px; margin:clamp(44px,6vw,72px) 0 0;">
+        <span style="flex:0 0 60px; height:1px; background:color-mix(in srgb, var(--paper) 30%, transparent);"></span>
+        <span style="letter-spacing:0.28em; text-transform:uppercase; font-size:11px; font-weight:600; color:color-mix(in srgb, var(--paper) 62%, transparent);">November 7, 2026 · Rio Frio, Texas</span>
+        <span style="flex:0 0 60px; height:1px; background:color-mix(in srgb, var(--paper) 30%, transparent);"></span>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+    @media (max-width: 900px) {
+      .lj-navmobile { position: absolute !important; right: 16px; top: 0; bottom: 0; width: auto !important; }
+      .lj-navcrest { height: 72px !important; }
+      .lj-mphoto { aspect-ratio: 3 / 2 !important; width: 100%; max-width: 420px; max-height: 260px; margin-left: auto; margin-right: auto; }
+      .lj-mheader { padding-top: 120px !important; padding-bottom: 64px !important; }
+      .lj-navlinks { display: none !important; }
+      .lj-navmobile { display: flex !important; }
+      .lj-day { grid-template-columns: 1fr !important; }
+      .lj-day-id { position: static !important; }
+      .lj-timeline { margin-top: 0 !important; }
+    }
+    #friday, #saturday, #sunday, #monday { scroll-margin-top: 128px; }
+  </style>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menuOpen: false };
+  }
+
+
+  componentDidMount() { this.syncBodyLock(); }
+  componentDidUpdate() { this.syncBodyLock(); }
+  componentWillUnmount() { document.body.style.overflow = ''; }
+
+  syncBodyLock() {
+    document.body.style.overflow = this.state.menuOpen ? 'hidden' : '';
+  }
+
+
+  renderVals() {
+    return {
+      menuOpen: this.state.menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      menuOpacity: this.state.menuOpen ? 1 : 0,
+      menuPointer: this.state.menuOpen ? 'auto' : 'none'
+    };
+  }
+}
+</script>
+</body>
+</html>

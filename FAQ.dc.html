@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Mulish:wght@300;400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  body { margin: 0; background: #FAF7F0; }
+  * { box-sizing: border-box; }
+  a { color: #A62F55; }
+  a:hover { color: #C33F67; }
+</style>
+</helmet>
+<div style="--paper:#FAF7F0; --ivory:#EDE2DE; --olive:#4A4F3B; --ink:#292A24; --sage:#A2B18A; --olive-gray:#989E84; --peach:#F4AE8C; --rose:#CFA79F; --raspberry:#C33F67; --link:#A62F55; --border:#E2D9CC; --gutter:clamp(24px,5vw,80px); --font-display:'Cormorant Garamond',Georgia,serif; --font-body:'Mulish',system-ui,sans-serif; --font-script:'Pinyon Script',cursive; background:var(--paper); color:var(--ink); font-family:var(--font-body); font-weight:300; line-height:1.7; -webkit-font-smoothing:antialiased;">
+
+
+  <!-- ══════════ NAV (solid — interior page) ══════════ -->
+  <nav data-screen-label="nav" style="position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:center; gap:clamp(14px,2vw,34px); padding:6px 0.75in; background:var(--paper); box-shadow:0 1px 0 rgba(226,217,204,0.9); color:var(--olive); transition:background 400ms ease;">
+    <div class="lj-navlinks" style="display:flex; align-items:center; gap:clamp(14px,2vw,30px); flex:1; justify-content:space-between;">
+      <a href="The%20Weekend.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Weekend</a>
+      <a href="Explore.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Explore</a>
+      <a href="Travel%20%26%20Stay.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Stay</a>
+    </div>
+    <a href="Home.dc.html" aria-label="Home" style="flex:0 0 auto; display:inline-flex; align-items:center; margin:0 clamp(24px,3.2vw,56px);">
+      <img class="lj-navcrest" src="assets/nav-crest-lj.png" alt="Libby &amp; Josh" style="display:block; height:104px; width:auto;">
+    </a>
+    <div class="lj-navlinks" style="display:flex; align-items:center; gap:clamp(14px,2vw,30px); flex:1; justify-content:space-between;">
+      <a href="Registry.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Our Registry</a>
+      <a href="FAQ.dc.html" style="color:var(--raspberry); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap; border-bottom:1.5px solid var(--raspberry); padding-bottom:2px;">FAQs</a>
+      <a href="RSVP.dc.html" style="color:var(--link); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">RSVP</a>
+    </div>
+    <div class="lj-navmobile" style="display:none; width:100%; align-items:center; justify-content:flex-end;">
+      <button type="button" aria-label="Open menu" onClick="{{ openMenu }}" style="background:transparent; border:none; padding:8px; display:inline-flex; flex-direction:column; gap:6px; cursor:pointer;">
+        <span style="display:block; width:26px; height:2px; background:var(--olive); border-radius:2px;"></span>
+        <span style="display:block; width:26px; height:2px; background:var(--olive); border-radius:2px;"></span>
+        <span style="display:block; width:26px; height:2px; background:var(--olive); border-radius:2px;"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div style="position:fixed; inset:0; z-index:80; background:var(--olive); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:clamp(18px,4vh,32px); padding:64px 24px; opacity:{{ menuOpacity }}; pointer-events:{{ menuPointer }}; transition:opacity 360ms ease;">
+    <button type="button" aria-label="Close menu" onClick="{{ closeMenu }}" style="position:absolute; top:18px; right:22px; background:transparent; border:none; cursor:pointer; width:40px; height:40px; color:var(--paper); font-size:30px; line-height:1;">×</button>
+    <a href="Home.dc.html" aria-label="Home" style="display:inline-flex; margin-bottom:12px;"><img src="assets/monogram.png" alt="Libby &amp; Josh" style="height:56px; width:auto; filter:brightness(0) invert(1); opacity:0.92;"></a>
+    <a href="The%20Weekend.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--peach); text-decoration:none;">Weekend</a>
+    <a href="Explore.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Explore</a>
+    <a href="Travel%20%26%20Stay.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Stay</a>
+    <a href="Registry.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Our Registry</a>
+    <a href="FAQ.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">FAQs</a>
+    <a href="RSVP.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">RSVP</a>
+  </div>
+
+
+  <header class="lj-mheader" data-screen-label="page header" style="position:relative; overflow:hidden; background:#A3B18A; color:var(--paper); padding:clamp(150px,15vw,220px) var(--gutter) clamp(96px,11vw,150px); text-align:center;">
+    <div style="position:absolute; inset:0; z-index:0;">
+      <image-slot id="faq-header-bg3" src="assets/faq-header-pinecones.jpg" shape="rect" fit="cover" placeholder="Drop a wide venue / river photo for the header" style="display:block; width:100%; height:100%;"></image-slot>
+    </div>
+    <div aria-hidden="true" style="position:absolute; inset:0; z-index:1; background:linear-gradient(to bottom, rgba(41,42,36,0.55), rgba(41,42,36,0.35) 45%, rgba(74,79,59,0.9)); pointer-events:none;"></div>
+    <div style="position:relative; z-index:2;">
+      <div style="letter-spacing:0.36em; text-transform:uppercase; font-size:12px; font-weight:600; color:color-mix(in srgb, var(--paper) 82%, transparent); margin-bottom:26px; transform:translateY(clamp(22px,3vw,46px));">The details</div>
+      <h1 style="font-family:var(--font-display); font-weight:500; font-size:clamp(52px,8vw,120px); line-height:0.95; margin:0 0 26px; transform:translateY(clamp(22px,3vw,46px)); color:var(--paper);">FAQs</h1>
+      <p style="font-family:var(--font-display); font-style:italic; font-size:clamp(20px,2.6vw,30px); line-height:1.4; color:color-mix(in srgb, var(--paper) 88%, transparent); max-width:38ch; margin:clamp(70px,9vw,120px) auto 0;">Everything you might be wondering. Still stuck? Just ask.</p>
+    </div>
+  </header>
+
+  <section data-screen-label="faq grid" style="background:var(--paper); padding:clamp(72px,9vw,120px) var(--gutter);">
+    <div class="lj-faq" style="max-width:1120px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:clamp(38px,4.5vw,60px) clamp(48px,6vw,90px);">
+      
+      <div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(21px,2.1vw,26px); line-height:1.2; margin:0 0 10px; color:var(--olive);">When should I RSVP by?</h3>
+        <p style="font-size:15px; line-height:1.85; margin:0; color:color-mix(in srgb,var(--ink) 84%,transparent);">Please reply by the date printed on your invitation. If you&rsquo;re not sure, RSVP as soon as you know &mdash; it helps us plan for everyone.</p>
+      </div>
+      
+      <div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(21px,2.1vw,26px); line-height:1.2; margin:0 0 10px; color:var(--olive);">Can I bring a guest?</h3>
+        <p style="font-size:15px; line-height:1.85; margin:0; color:color-mix(in srgb,var(--ink) 84%,transparent);">Your invitation and RSVP will show how many seats are reserved in your name. If you have a question about a plus-one, just reach out to us directly.</p>
+      </div>
+      
+      <div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(21px,2.1vw,26px); line-height:1.2; margin:0 0 10px; color:var(--olive);">Are kids welcome?</h3>
+        <p style="font-size:15px; line-height:1.85; margin:0; color:color-mix(in srgb,var(--ink) 84%,transparent);">We welcome kids throughout the weekend but please ask that the ceremony and reception remain only immediate family. If this affects your ability to attend, please text Libby and we will do our best to accommodate.</p>
+      </div>
+      
+      <div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(21px,2.1vw,26px); line-height:1.2; margin:0 0 10px; color:var(--olive);">What should I wear?</h3>
+        <p style="font-size:15px; line-height:1.85; margin:0; color:color-mix(in srgb,var(--ink) 84%,transparent);">Friday&rsquo;s welcome party is Texas cocktail; Saturday&rsquo;s wedding is black-tie optional. Think comfortable in the grass and by the water &mdash; and a layer for the evening.</p>
+      </div>
+      
+      <div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(21px,2.1vw,26px); line-height:1.2; margin:0 0 10px; color:var(--olive);">What will the weather be like?</h3>
+        <p style="font-size:15px; line-height:1.85; margin:0; color:color-mix(in srgb,var(--ink) 84%,transparent);">Early-November Hill Country days are usually mild and sunny, with cool nights. Pack a wrap or jacket for after sunset.</p>
+      </div>
+      
+      <div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(21px,2.1vw,26px); line-height:1.2; margin:0 0 10px; color:var(--olive);">Where does everything happen?</h3>
+        <p style="font-size:15px; line-height:1.85; margin:0; color:color-mix(in srgb,var(--ink) 84%,transparent);">Unless we tell you otherwise, every event takes place at Rio Bella Resort in Leakey. See The Weekend for the full schedule.</p>
+      </div>
+      
+      <div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(21px,2.1vw,26px); line-height:1.2; margin:0 0 10px; color:var(--olive);">Is there parking?</h3>
+        <p style="font-size:15px; line-height:1.85; margin:0; color:color-mix(in srgb,var(--ink) 84%,transparent);">Yes &mdash; free parking is available on-site at the resort. You&rsquo;ll want a car for the weekend, as the canyon is spread out.</p>
+      </div>
+      
+      <div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(21px,2.1vw,26px); line-height:1.2; margin:0 0 10px; color:var(--olive);">Where should I stay?</h3>
+        <p style="font-size:15px; line-height:1.85; margin:0; color:color-mix(in srgb,var(--ink) 84%,transparent);">On-site cabins, nearby Airbnb rentals, and camping are all options. Our Travel &amp; Stay page has the details, with a booking link coming soon.</p>
+      </div>
+      
+      <div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(21px,2.1vw,26px); line-height:1.2; margin:0 0 10px; color:var(--olive);">Will there be cell service?</h3>
+        <p style="font-size:15px; line-height:1.85; margin:0; color:color-mix(in srgb,var(--ink) 84%,transparent);">Signal is spotty in Frio Canyon. Download your directions ahead of time and let people know you may be off-grid for the weekend.</p>
+      </div>
+      
+      <div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(21px,2.1vw,26px); line-height:1.2; margin:0 0 10px; color:var(--olive);">I have a dietary restriction.</h3>
+        <p style="font-size:15px; line-height:1.85; margin:0; color:color-mix(in srgb,var(--ink) 84%,transparent);">Let us know on your RSVP and we&rsquo;ll pass it along. We want everyone well-fed and comfortable.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="faq contact" style="background:var(--ivory); text-align:center; padding:clamp(70px,9vw,110px) var(--gutter);">
+    <div style="max-width:560px; margin:0 auto;">
+      <div style="letter-spacing:0.3em; text-transform:uppercase; font-size:12px; font-weight:600; color:var(--olive-gray); margin-bottom:14px;">Still wondering?</div>
+      <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(30px,4vw,46px); line-height:1.05; margin:0 0 18px; color:var(--olive);">Just ask us</h2>
+      <p style="font-size:16px; line-height:1.85; color:color-mix(in srgb,var(--ink) 84%,transparent); margin:0 0 30px;">If your question isn&rsquo;t here, reach out to Libby &amp; Josh directly &mdash; we&rsquo;re always happy to help you plan your trip.</p>
+      <a href="RSVP.dc.html" style="display:inline-block; background:var(--olive); color:var(--paper); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; padding:16px 44px; border-radius:999px;">RSVP now</a>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer data-screen-label="footer" style="background:var(--olive); color:var(--paper); padding:clamp(80px,11vw,130px) var(--gutter) 52px; text-align:center;">
+    <div style="max-width:920px; margin:0 auto;">
+      <img src="assets/monogram.png" alt="Libby &amp; Josh" style="height:clamp(96px,11vw,132px); width:auto; margin:0 auto 26px; display:block; filter:brightness(0) invert(1); opacity:0.94;">
+      <p style="font-family:var(--font-display); font-style:italic; font-size:clamp(22px,2.6vw,32px); line-height:1.4; color:color-mix(in srgb, var(--paper) 88%, transparent); margin:0 auto; max-width:36ch;">With love and a little river water<br>Libby &amp; Josh</p>
+      <div style="display:flex; align-items:center; justify-content:center; gap:16px; margin:clamp(44px,6vw,72px) 0 0;">
+        <span style="flex:0 0 60px; height:1px; background:color-mix(in srgb, var(--paper) 30%, transparent);"></span>
+        <span style="letter-spacing:0.28em; text-transform:uppercase; font-size:11px; font-weight:600; color:color-mix(in srgb, var(--paper) 62%, transparent);">November 7, 2026 · Rio Frio, Texas</span>
+        <span style="flex:0 0 60px; height:1px; background:color-mix(in srgb, var(--paper) 30%, transparent);"></span>
+      </div>
+    </div>
+  </footer>
+
+
+  <style>
+    @media (max-width: 900px) {
+      .lj-navmobile { position: absolute !important; right: 16px; top: 0; bottom: 0; width: auto !important; }
+      .lj-navcrest { height: 72px !important; }
+      .lj-mphoto { aspect-ratio: 4 / 3 !important; }
+      .lj-mheader { padding-top: 120px !important; padding-bottom: 64px !important; }
+      .lj-navlinks { display: none !important; }
+      .lj-navmobile { display: flex !important; }
+      .lj-split, .lj-cards3, .lj-cards2, .lj-faq { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menuOpen: false };
+  }
+
+
+  componentDidMount() { this.syncBodyLock(); }
+  componentDidUpdate() { this.syncBodyLock(); }
+  componentWillUnmount() { document.body.style.overflow = ''; }
+
+  syncBodyLock() {
+    document.body.style.overflow = this.state.menuOpen ? 'hidden' : '';
+  }
+
+
+  renderVals() {
+    return {
+      menuOpen: this.state.menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      menuOpacity: this.state.menuOpen ? 1 : 0,
+      menuPointer: this.state.menuOpen ? 'auto' : 'none'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Mulish:wght@300;400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  body { margin: 0; background: #FAF7F0; }
+  * { box-sizing: border-box; }
+  a { color: #A62F55; }
+  a:hover { color: #C33F67; }
+</style>
+</helmet>
+<div style="--paper:#FAF7F0; --ivory:#EDE2DE; --olive:#4A4F3B; --ink:#292A24; --sage:#A2B18A; --olive-gray:#989E84; --peach:#F4AE8C; --rose:#CFA79F; --raspberry:#C33F67; --link:#A62F55; --border:#E2D9CC; --gutter:clamp(24px,5vw,80px); --font-display:'Cormorant Garamond',Georgia,serif; --font-body:'Mulish',system-ui,sans-serif; --font-script:'Pinyon Script',cursive; background:var(--paper); color:var(--ink); font-family:var(--font-body); font-weight:300; line-height:1.7; -webkit-font-smoothing:antialiased;">
+
+
+  <!-- ══════════ NAV (solid — interior page) ══════════ -->
+  <nav data-screen-label="nav" style="position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:center; gap:clamp(14px,2vw,34px); padding:6px 0.75in; background:var(--paper); box-shadow:0 1px 0 rgba(226,217,204,0.9); color:var(--olive); transition:background 400ms ease;">
+    <div class="lj-navlinks" style="display:flex; align-items:center; gap:clamp(14px,2vw,30px); flex:1; justify-content:space-between;">
+      <a href="The%20Weekend.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Weekend</a>
+      <a href="Explore.dc.html" style="color:var(--raspberry); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap; border-bottom:1.5px solid var(--raspberry); padding-bottom:2px;">Explore</a>
+      <a href="Travel%20%26%20Stay.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Stay</a>
+    </div>
+    <a href="Home.dc.html" aria-label="Home" style="flex:0 0 auto; display:inline-flex; align-items:center; margin:0 clamp(24px,3.2vw,56px);">
+      <img class="lj-navcrest" src="assets/nav-crest-lj.png" alt="Libby &amp; Josh" style="display:block; height:104px; width:auto;">
+    </a>
+    <div class="lj-navlinks" style="display:flex; align-items:center; gap:clamp(14px,2vw,30px); flex:1; justify-content:space-between;">
+      <a href="Registry.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Our Registry</a>
+      <a href="FAQ.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">FAQs</a>
+      <a href="RSVP.dc.html" style="color:var(--link); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">RSVP</a>
+    </div>
+    <div class="lj-navmobile" style="display:none; width:100%; align-items:center; justify-content:flex-end;">
+      <button type="button" aria-label="Open menu" onClick="{{ openMenu }}" style="background:transparent; border:none; padding:8px; display:inline-flex; flex-direction:column; gap:6px; cursor:pointer;">
+        <span style="display:block; width:26px; height:2px; background:var(--olive); border-radius:2px;"></span>
+        <span style="display:block; width:26px; height:2px; background:var(--olive); border-radius:2px;"></span>
+        <span style="display:block; width:26px; height:2px; background:var(--olive); border-radius:2px;"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div style="position:fixed; inset:0; z-index:80; background:var(--olive); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:clamp(18px,4vh,32px); padding:64px 24px; opacity:{{ menuOpacity }}; pointer-events:{{ menuPointer }}; transition:opacity 360ms ease;">
+    <button type="button" aria-label="Close menu" onClick="{{ closeMenu }}" style="position:absolute; top:18px; right:22px; background:transparent; border:none; cursor:pointer; width:40px; height:40px; color:var(--paper); font-size:30px; line-height:1;">×</button>
+    <a href="Home.dc.html" aria-label="Home" style="display:inline-flex; margin-bottom:12px;"><img src="assets/monogram.png" alt="Libby &amp; Josh" style="height:56px; width:auto; filter:brightness(0) invert(1); opacity:0.92;"></a>
+    <a href="The%20Weekend.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--peach); text-decoration:none;">Weekend</a>
+    <a href="Explore.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Explore</a>
+    <a href="Travel%20%26%20Stay.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Stay</a>
+    <a href="Registry.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Our Registry</a>
+    <a href="FAQ.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">FAQs</a>
+    <a href="RSVP.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">RSVP</a>
+  </div>
+
+
+  <header class="lj-mheader" data-screen-label="page header" style="position:relative; overflow:hidden; background:#A3B18A; color:var(--paper); padding:clamp(150px,15vw,220px) var(--gutter) clamp(96px,11vw,150px); text-align:center;">
+    <div style="position:absolute; inset:0; z-index:0;">
+      <image-slot id="explore-header-bg" src="assets/weekend-header.jpeg" shape="rect" fit="cover" placeholder="Drop a wide Hill Country / canyon photo for the header" style="display:block; width:100%; height:100%;"></image-slot>
+    </div>
+    <div aria-hidden="true" style="position:absolute; inset:0; z-index:1; background:linear-gradient(to bottom, rgba(41,42,36,0.55), rgba(41,42,36,0.35) 45%, rgba(74,79,59,0.9)); pointer-events:none;"></div>
+    <div style="position:relative; z-index:2;">
+      <div style="letter-spacing:0.36em; text-transform:uppercase; font-size:12px; font-weight:600; color:color-mix(in srgb, var(--paper) 82%, transparent); margin-bottom:26px;">The Frio Canyon</div>
+      <h1 style="font-family:var(--font-display); font-weight:500; font-size:clamp(52px,8vw,120px); line-height:0.95; margin:0 0 26px; color:var(--paper);">Explore</h1>
+      <p style="font-family:var(--font-display); font-style:italic; font-size:clamp(20px,2.6vw,30px); line-height:1.4; color:color-mix(in srgb, var(--paper) 88%, transparent); max-width:42ch; margin:0 auto;">Rivers to float, canyons to drive, and skies full of stars &mdash; a few of our favorite corners of the Hill Country.</p>
+    </div>
+  </header>
+
+  <section data-screen-label="explore intro" style="background:var(--paper); padding:clamp(72px,9vw,110px) var(--gutter) clamp(30px,4vw,50px); text-align:center;">
+    <div style="max-width:640px; margin:0 auto;">
+      <div style="letter-spacing:0.3em; text-transform:uppercase; font-size:12px; font-weight:600; color:var(--olive-gray); margin-bottom:16px;">Make a weekend of it</div>
+      <p style="font-family:var(--font-display); font-size:clamp(22px,2.8vw,32px); line-height:1.45; color:var(--olive); margin:0;">Come early, stay late. The Frio Canyon rewards a slow pace &mdash; here are a few of our favorite ways to spend the extra hours.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="explore grid" style="background:var(--paper); padding:clamp(20px,3vw,40px) var(--gutter) clamp(80px,10vw,130px);">
+    <div style="max-width:1240px; margin:0 auto;" class="lj-cards3">
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(28px,3.4vw,48px);" class="lj-cards3">
+        
+      <div style="display:flex; flex-direction:column;">
+        <div style="position:relative; aspect-ratio:4/3; overflow:hidden; background:var(--ivory); margin-bottom:20px;"><image-slot id="explore-1" shape="rect" fit="cover" placeholder="Drop a Frio River float photo" style="display:block; width:100%; height:100%;"></image-slot></div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(24px,2.4vw,30px); line-height:1.05; margin:0 0 10px; color:var(--olive);">Float the Frio</h3>
+        <p style="font-size:15px; line-height:1.8; margin:0; color:color-mix(in srgb,var(--ink) 82%,transparent);">Clear, spring-fed and shaded by cypress, the Frio is made for a lazy tube down the river. Rentals are easy to find in Concan and Leakey.</p>
+      </div>
+        
+      <div style="display:flex; flex-direction:column;">
+        <div style="position:relative; aspect-ratio:4/3; overflow:hidden; background:var(--ivory); margin-bottom:20px;"><image-slot id="explore-2" shape="rect" fit="cover" placeholder="Drop a Garner State Park photo" style="display:block; width:100%; height:100%;"></image-slot></div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(24px,2.4vw,30px); line-height:1.05; margin:0 0 10px; color:var(--olive);">Garner State Park</h3>
+        <p style="font-size:15px; line-height:1.8; margin:0; color:color-mix(in srgb,var(--ink) 82%,transparent);">A Texas classic &mdash; hiking, swimming, and paddle boats by day, with the legendary summer dance still part of local lore. Trails climb to big canyon views.</p>
+      </div>
+        
+      <div style="display:flex; flex-direction:column;">
+        <div style="position:relative; aspect-ratio:4/3; overflow:hidden; background:var(--ivory); margin-bottom:20px;"><image-slot id="explore-3" shape="rect" fit="cover" placeholder="Drop a Lost Maples photo" style="display:block; width:100%; height:100%;"></image-slot></div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(24px,2.4vw,30px); line-height:1.05; margin:0 0 10px; color:var(--olive);">Lost Maples</h3>
+        <p style="font-size:15px; line-height:1.8; margin:0; color:color-mix(in srgb,var(--ink) 82%,transparent);">A rare stand of bigtooth maples that lights up in autumn. Come November, the canyon color is worth the short drive and the walk.</p>
+      </div>
+        
+      <div style="display:flex; flex-direction:column;">
+        <div style="position:relative; aspect-ratio:4/3; overflow:hidden; background:var(--ivory); margin-bottom:20px;"><image-slot id="explore-4" shape="rect" fit="cover" placeholder="Drop a scenic-drive photo" style="display:block; width:100%; height:100%;"></image-slot></div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(24px,2.4vw,30px); line-height:1.05; margin:0 0 10px; color:var(--olive);">Ranch Road 337</h3>
+        <p style="font-size:15px; line-height:1.8; margin:0; color:color-mix(in srgb,var(--ink) 82%,transparent);">One of the most beautiful drives in Texas &mdash; the Twisted Sisters loop rolls over ridgelines and down into the canyons. Windows down, no rush.</p>
+      </div>
+        
+      <div style="display:flex; flex-direction:column;">
+        <div style="position:relative; aspect-ratio:4/3; overflow:hidden; background:var(--ivory); margin-bottom:20px;"><image-slot id="explore-5" shape="rect" fit="cover" placeholder="Drop a local-eats photo" style="display:block; width:100%; height:100%;"></image-slot></div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(24px,2.4vw,30px); line-height:1.05; margin:0 0 10px; color:var(--olive);">Local Eats</h3>
+        <p style="font-size:15px; line-height:1.8; margin:0; color:color-mix(in srgb,var(--ink) 82%,transparent);">From roadside barbecue to a cold drink in Leakey, the canyon keeps it simple and good. One of our favorites is the Bent Rim Grill.</p>
+      </div>
+        
+      <div style="display:flex; flex-direction:column;">
+        <div style="position:relative; aspect-ratio:4/3; overflow:hidden; background:var(--ivory); margin-bottom:20px;"><image-slot id="explore-6" shape="rect" fit="cover" placeholder="Drop a night-sky / stars photo" style="display:block; width:100%; height:100%;"></image-slot></div>
+        <h3 style="font-family:var(--font-display); font-weight:500; font-size:clamp(24px,2.4vw,30px); line-height:1.05; margin:0 0 10px; color:var(--olive);">Elm Creek Stables</h3>
+        <p style="font-size:15px; line-height:1.8; margin:0; color:color-mix(in srgb,var(--ink) 82%,transparent);">Swap your tube for a saddle and take in the beautiful Texas Hill Country on horseback.</p>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="explore cta" style="background:#A3B18A; color:var(--ink); text-align:center; padding:clamp(72px,10vw,120px) 24px;">
+    <p style="font-family:var(--font-display); font-style:italic; font-size:clamp(24px,3.6vw,44px); line-height:1.35; margin:0 auto 34px; max-width:26ch; color:var(--olive);">However you spend it, we&rsquo;re just glad you&rsquo;ll be here.</p>
+    <a href="Travel%20%26%20Stay.dc.html" style="display:inline-block; background:var(--olive); color:var(--paper); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; padding:16px 44px; border-radius:999px;">Where to stay</a>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer data-screen-label="footer" style="background:var(--olive); color:var(--paper); padding:clamp(80px,11vw,130px) var(--gutter) 52px; text-align:center;">
+    <div style="max-width:920px; margin:0 auto;">
+      <img src="assets/monogram.png" alt="Libby &amp; Josh" style="height:clamp(96px,11vw,132px); width:auto; margin:0 auto 26px; display:block; filter:brightness(0) invert(1); opacity:0.94;">
+      <p style="font-family:var(--font-display); font-style:italic; font-size:clamp(22px,2.6vw,32px); line-height:1.4; color:color-mix(in srgb, var(--paper) 88%, transparent); margin:0 auto; max-width:36ch;">With love and a little river water<br>Libby &amp; Josh</p>
+      <div style="display:flex; align-items:center; justify-content:center; gap:16px; margin:clamp(44px,6vw,72px) 0 0;">
+        <span style="flex:0 0 60px; height:1px; background:color-mix(in srgb, var(--paper) 30%, transparent);"></span>
+        <span style="letter-spacing:0.28em; text-transform:uppercase; font-size:11px; font-weight:600; color:color-mix(in srgb, var(--paper) 62%, transparent);">November 7, 2026 · Rio Frio, Texas</span>
+        <span style="flex:0 0 60px; height:1px; background:color-mix(in srgb, var(--paper) 30%, transparent);"></span>
+      </div>
+    </div>
+  </footer>
+
+
+  <style>
+    @media (max-width: 900px) {
+      .lj-navmobile { position: absolute !important; right: 16px; top: 0; bottom: 0; width: auto !important; }
+      .lj-navcrest { height: 72px !important; }
+      .lj-mphoto { aspect-ratio: 4 / 3 !important; }
+      .lj-mheader { padding-top: 120px !important; padding-bottom: 64px !important; }
+      .lj-navlinks { display: none !important; }
+      .lj-navmobile { display: flex !important; }
+      .lj-split, .lj-cards3, .lj-cards2, .lj-faq { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menuOpen: false };
+  }
+
+
+  componentDidMount() { this.syncBodyLock(); }
+  componentDidUpdate() { this.syncBodyLock(); }
+  componentWillUnmount() { document.body.style.overflow = ''; }
+
+  syncBodyLock() {
+    document.body.style.overflow = this.state.menuOpen ? 'hidden' : '';
+  }
+
+
+  renderVals() {
+    return {
+      menuOpen: this.state.menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      menuOpacity: this.state.menuOpen ? 1 : 0,
+      menuPointer: this.state.menuOpen ? 'auto' : 'none'
+    };
+  }
+}
+</script>
+</body>
+</html>

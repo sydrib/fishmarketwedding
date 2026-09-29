@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Mulish:wght@300;400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  body { margin: 0; background: #FAF7F0; }
+  * { box-sizing: border-box; }
+  a { color: #A62F55; }
+  a:hover { color: #C33F67; }
+</style>
+</helmet>
+<div style="--paper:#FAF7F0; --ivory:#EDE2DE; --olive:#4A4F3B; --ink:#292A24; --sage:#A2B18A; --olive-gray:#989E84; --peach:#F4AE8C; --rose:#CFA79F; --raspberry:#C33F67; --link:#A62F55; --border:#E2D9CC; --gutter:clamp(24px,5vw,80px); --font-display:'Cormorant Garamond',Georgia,serif; --font-body:'Mulish',system-ui,sans-serif; --font-script:'Pinyon Script',cursive; background:var(--paper); color:var(--ink); font-family:var(--font-body); font-weight:300; line-height:1.7; -webkit-font-smoothing:antialiased;">
+
+
+  <!-- ══════════ NAV (solid — interior page) ══════════ -->
+  <nav data-screen-label="nav" style="position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:center; gap:clamp(14px,2vw,34px); padding:6px 0.75in; background:var(--paper); box-shadow:0 1px 0 rgba(226,217,204,0.9); color:var(--olive); transition:background 400ms ease;">
+    <div class="lj-navlinks" style="display:flex; align-items:center; gap:clamp(14px,2vw,30px); flex:1; justify-content:space-between;">
+      <a href="The%20Weekend.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Weekend</a>
+      <a href="Explore.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Explore</a>
+      <a href="Travel%20%26%20Stay.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Stay</a>
+    </div>
+    <a href="Home.dc.html" aria-label="Home" style="flex:0 0 auto; display:inline-flex; align-items:center; margin:0 clamp(24px,3.2vw,56px);">
+      <img class="lj-navcrest" src="assets/nav-crest-lj.png" alt="Libby &amp; Josh" style="display:block; height:104px; width:auto;">
+    </a>
+    <div class="lj-navlinks" style="display:flex; align-items:center; gap:clamp(14px,2vw,30px); flex:1; justify-content:space-between;">
+      <a href="Registry.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">Our Registry</a>
+      <a href="FAQ.dc.html" style="color:var(--olive); text-decoration:none; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;">FAQs</a>
+      <a href="RSVP.dc.html" style="color:var(--raspberry); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap; border-bottom:1.5px solid var(--raspberry); padding-bottom:2px;">RSVP</a>
+    </div>
+    <div class="lj-navmobile" style="display:none; width:100%; align-items:center; justify-content:flex-end;">
+      <button type="button" aria-label="Open menu" onClick="{{ openMenu }}" style="background:transparent; border:none; padding:8px; display:inline-flex; flex-direction:column; gap:6px; cursor:pointer;">
+        <span style="display:block; width:26px; height:2px; background:var(--olive); border-radius:2px;"></span>
+        <span style="display:block; width:26px; height:2px; background:var(--olive); border-radius:2px;"></span>
+        <span style="display:block; width:26px; height:2px; background:var(--olive); border-radius:2px;"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div style="position:fixed; inset:0; z-index:80; background:var(--olive); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:clamp(18px,4vh,32px); padding:64px 24px; opacity:{{ menuOpacity }}; pointer-events:{{ menuPointer }}; transition:opacity 360ms ease;">
+    <button type="button" aria-label="Close menu" onClick="{{ closeMenu }}" style="position:absolute; top:18px; right:22px; background:transparent; border:none; cursor:pointer; width:40px; height:40px; color:var(--paper); font-size:30px; line-height:1;">×</button>
+    <a href="Home.dc.html" aria-label="Home" style="display:inline-flex; margin-bottom:12px;"><img src="assets/monogram.png" alt="Libby &amp; Josh" style="height:56px; width:auto; filter:brightness(0) invert(1); opacity:0.92;"></a>
+    <a href="The%20Weekend.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--peach); text-decoration:none;">Weekend</a>
+    <a href="Explore.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Explore</a>
+    <a href="Travel%20%26%20Stay.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Stay</a>
+    <a href="Registry.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">Our Registry</a>
+    <a href="FAQ.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">FAQs</a>
+    <a href="RSVP.dc.html" style="font-family:var(--font-display); font-size:30px; color:var(--paper); text-decoration:none;">RSVP</a>
+  </div>
+
+
+  <header class="lj-mheader" data-screen-label="page header" style="position:relative; overflow:hidden; background:#A3B18A; color:var(--paper); padding:clamp(150px,15vw,220px) var(--gutter) clamp(96px,11vw,150px); text-align:center;">
+    <div style="position:absolute; inset:0; z-index:0;">
+      <image-slot id="rsvp-header-bg" src="assets/rsvp-header.jpg" shape="rect" fit="cover" placeholder="Drop a wide river / celebration photo for the header" style="display:block; width:100%; height:100%;"></image-slot>
+    </div>
+    <div aria-hidden="true" style="position:absolute; inset:0; z-index:1; background:linear-gradient(to bottom, rgba(41,42,36,0.55), rgba(41,42,36,0.35) 45%, rgba(74,79,59,0.9)); pointer-events:none;"></div>
+    <div style="position:relative; z-index:2;">
+      <div style="letter-spacing:0.36em; text-transform:uppercase; font-size:12px; font-weight:600; color:color-mix(in srgb, var(--paper) 82%, transparent); margin-bottom:26px;">Will we see you?</div>
+      <h1 style="font-family:var(--font-display); font-weight:500; font-size:clamp(52px,8vw,120px); line-height:0.95; margin:0 0 26px; color:var(--paper);">RSVP</h1>
+      <p style="font-family:var(--font-display); font-style:italic; font-size:clamp(20px,2.6vw,30px); line-height:1.4; color:color-mix(in srgb, var(--paper) 88%, transparent); max-width:36ch; margin:0 auto;">Find your invitation and let us know &mdash; we&rsquo;re saving a spot by the river for you.</p>
+    </div>
+  </header>
+
+  <section data-screen-label="rsvp form" style="background:var(--paper); padding:clamp(72px,9vw,120px) var(--gutter);">
+    <div style="max-width:640px; margin:0 auto;">
+      <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center; padding:clamp(30px,5vw,60px) 0;">
+          <div style="font-family:var(--font-script); font-size:clamp(48px,7vw,80px); color:var(--raspberry); line-height:0.9; margin-bottom:20px;">Thank you</div>
+          <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(30px,4vw,48px); line-height:1.05; margin:0 0 18px; color:var(--olive);">We can&rsquo;t wait to celebrate</h2>
+          <p style="font-size:17px; line-height:1.9; color:color-mix(in srgb,var(--ink) 84%,transparent); max-width:44ch; margin:0 auto 34px;">Your reply is on its way to us{{ nameSuffix }}. If anything changes, just send it again &mdash; and reach out anytime with questions about the weekend.</p>
+          <a href="The%20Weekend.dc.html" style="display:inline-block; background:var(--olive); color:var(--paper); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; padding:16px 44px; border-radius:999px;">See the weekend</a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ previewMode }}" hint-placeholder-val="{{ false }}">
+        <p style="font-size:12px; line-height:1.6; margin:0 0 28px; padding:10px 14px; border:1px dashed var(--olive-gray); color:var(--olive-gray); text-align:center;">Preview mode &mdash; the RSVP service isn&rsquo;t connected yet, so this uses sample names (try &ldquo;Jane Sample&rdquo;) and replies are not saved.</p>
+      </sc-if>
+      <sc-if value="{{ showLookup }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ onLookup }}" style="display:flex; flex-direction:column; gap:22px; text-align:center; align-items:center;">
+          <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(28px,3.4vw,40px); line-height:1.1; margin:0; color:var(--olive);">Find your invitation</h2>
+          <p style="font-size:16px; line-height:1.8; margin:0; max-width:44ch; color:var(--ink);">Enter your first and last name as they appear on your invitation.</p>
+          <input type="text" value="{{ lookupValue }}" onInput="{{ onLookupInput }}" placeholder="First &amp; last name" aria-label="Your full name" autoComplete="name" style="width:100%; background:var(--paper); border:1px solid var(--border); outline:none; padding:14px 16px; color:var(--ink); font-family:var(--font-body); font-weight:400; font-size:16px; border-radius:4px; max-width:420px; text-align:center;">
+          <sc-if value="{{ lookupError }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:14px; line-height:1.7; margin:0; color:var(--raspberry); max-width:44ch;">{{ lookupErrorText }}</p>
+          </sc-if>
+          <button type="submit" disabled="{{ busy }}" style="background:var(--raspberry); color:var(--paper); border:none; cursor:pointer; font-family:var(--font-body); font-weight:600; font-size:12px; letter-spacing:0.22em; text-transform:uppercase; padding:16px 48px; border-radius:999px; opacity:{{ busyOpacity }};">{{ lookupLabel }}</button>
+        </form>
+      </sc-if>
+      <sc-if value="{{ showMatches }}" hint-placeholder-val="{{ false }}">
+        <div data-rsvp-step="matches" style="display:flex; flex-direction:column; gap:14px; align-items:center; text-align:center;">
+          <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(26px,3vw,36px); line-height:1.1; margin:0 0 6px; color:var(--olive);">Which invitation is yours?</h2>
+          <sc-for list="{{ matches }}" as="m" hint-placeholder-count="2">
+            <button type="button" onClick="{{ m.onPick }}" style="width:100%; max-width:420px; background:transparent; border:1px solid var(--border); border-radius:4px; padding:16px; cursor:pointer; font-family:var(--font-body); font-size:15px; color:var(--ink); text-align:left;">
+              <div style="font-weight:600;">{{ m.label }}</div>
+              <div style="font-size:13px; color:var(--olive-gray); margin-top:4px;">{{ m.names }}</div>
+            </button>
+          </sc-for>
+          <button type="button" onClick="{{ onBack }}" style="background:transparent; border:none; cursor:pointer; font-family:var(--font-body); font-size:13px; color:var(--olive); text-decoration:underline; text-underline-offset:3px; margin-top:8px;">Search again</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showInvite }}" hint-placeholder-val="{{ false }}">
+        <form onSubmit="{{ onSubmit }}" noValidate="{{ true }}" style="display:flex; flex-direction:column; gap:30px;">
+          <div style="text-align:center;">
+            <div style="letter-spacing:0.24em; text-transform:uppercase; font-size:11px; font-weight:600; color:var(--olive-gray); margin-bottom:10px;">Your invitation</div>
+            <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(28px,3.4vw,40px); line-height:1.1; margin:0; color:var(--olive);">{{ partyLabel }}</h2>
+          </div>
+          <sc-for list="{{ guestRows }}" as="g" hint-placeholder-count="2">
+            <div style="border-top:1px solid var(--border); padding-top:24px; display:flex; flex-direction:column; gap:16px;">
+              <sc-if value="{{ g.showName }}" hint-placeholder-val="{{ true }}">
+                <div style="font-family:var(--font-display); font-size:24px; line-height:1.2; color:var(--ink);">{{ g.name }}</div>
+              </sc-if>
+              <sc-if value="{{ g.isPlus }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <div style="font-family:var(--font-display); font-size:24px; line-height:1.2; color:var(--ink);">{{ g.plusTitle }}</div>
+                  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px;">
+                    <div>
+                      <label style="display:block; letter-spacing:0.16em; text-transform:uppercase; font-size:11px; font-weight:700; color:var(--olive-gray); margin-bottom:9px;">Guest first name</label>
+                      <input type="text" value="{{ g.plusFirst }}" onInput="{{ g.onPlusFirst }}" autoComplete="off" style="width:100%; background:var(--paper); border:1px solid var(--border); outline:none; padding:14px 16px; color:var(--ink); font-family:var(--font-body); font-weight:400; font-size:16px; border-radius:4px;">
+                    </div>
+                    <div>
+                      <label style="display:block; letter-spacing:0.16em; text-transform:uppercase; font-size:11px; font-weight:700; color:var(--olive-gray); margin-bottom:9px;">Guest last name</label>
+                      <input type="text" value="{{ g.plusLast }}" onInput="{{ g.onPlusLast }}" autoComplete="off" style="width:100%; background:var(--paper); border:1px solid var(--border); outline:none; padding:14px 16px; color:var(--ink); font-family:var(--font-body); font-weight:400; font-size:16px; border-radius:4px;">
+                    </div>
+                  </div>
+                </div>
+              </sc-if>
+              <sc-for list="{{ g.events }}" as="ev" hint-placeholder-count="2">
+                <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px;">
+                  <div style="flex:1 1 200px; font-size:15px; color:var(--ink);">{{ ev.label }}</div>
+                  <div style="display:flex; gap:8px; flex:1 1 260px;">
+                    <button type="button" onClick="{{ ev.onYes }}" style="flex:1; min-width:120px; cursor:pointer; font-family:var(--font-body); font-weight:600; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; padding:12px 16px; border-radius:999px; border:1px solid var(--olive); background:{{ ev.yesBg }}; color:{{ ev.yesColor }};">Accepts</button>
+                    <button type="button" onClick="{{ ev.onNo }}" style="flex:1; min-width:120px; cursor:pointer; font-family:var(--font-body); font-weight:600; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; padding:12px 16px; border-radius:999px; border:1px solid var(--olive); background:{{ ev.noBg }}; color:{{ ev.noColor }};">Declines</button>
+                  </div>
+                </div>
+              </sc-for>
+              <sc-if value="{{ g.needsContact }}" hint-placeholder-val="{{ true }}">
+                <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px;">
+                  <div>
+                    <label style="display:block; letter-spacing:0.16em; text-transform:uppercase; font-size:11px; font-weight:700; color:var(--olive-gray); margin-bottom:9px;">Email</label>
+                    <input type="email" value="{{ g.email }}" onInput="{{ g.onEmail }}" placeholder="you@example.com" autoComplete="email" style="width:100%; background:var(--paper); border:1px solid var(--border); outline:none; padding:14px 16px; color:var(--ink); font-family:var(--font-body); font-weight:400; font-size:16px; border-radius:4px;">
+                  </div>
+                  <div>
+                    <label style="display:block; letter-spacing:0.16em; text-transform:uppercase; font-size:11px; font-weight:700; color:var(--olive-gray); margin-bottom:9px;">Phone</label>
+                    <input type="tel" value="{{ g.phone }}" onInput="{{ g.onPhone }}" placeholder="(512) 555-0123" autoComplete="tel" style="width:100%; background:var(--paper); border:1px solid var(--border); outline:none; padding:14px 16px; color:var(--ink); font-family:var(--font-body); font-weight:400; font-size:16px; border-radius:4px;">
+                  </div>
+                </div>
+              </sc-if>
+              <div>
+                <label style="display:block; letter-spacing:0.16em; text-transform:uppercase; font-size:11px; font-weight:700; color:var(--olive-gray); margin-bottom:9px;">Dietary notes</label>
+                <input type="text" value="{{ g.dietary }}" onInput="{{ g.onDietary }}" placeholder="Allergies or restrictions (optional)" style="width:100%; background:var(--paper); border:1px solid var(--border); outline:none; padding:14px 16px; color:var(--ink); font-family:var(--font-body); font-weight:400; font-size:16px; border-radius:4px;">
+              </div>
+            </div>
+          </sc-for>
+          <div style="border-top:1px solid var(--border); padding-top:26px;">
+            <label style="display:block; letter-spacing:0.16em; text-transform:uppercase; font-size:11px; font-weight:700; color:var(--olive-gray); margin-bottom:9px;">A note to the couple</label>
+            <textarea rows="3" value="{{ message }}" onInput="{{ onMessage }}" placeholder="Anything you&rsquo;d like us to know (optional)" style="width:100%; background:var(--paper); border:1px solid var(--border); outline:none; padding:14px 16px; color:var(--ink); font-family:var(--font-body); font-weight:400; font-size:16px; border-radius:4px; resize:vertical; line-height:1.6;"></textarea>
+          </div>
+          <sc-if value="{{ inviteError }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:14px; line-height:1.7; margin:0; color:var(--raspberry);">{{ inviteErrorText }}</p>
+          </sc-if>
+          <div style="display:flex; flex-wrap:wrap; align-items:center; gap:18px;">
+            <button type="submit" disabled="{{ busy }}" style="background:var(--raspberry); color:var(--paper); border:none; cursor:pointer; font-family:var(--font-body); font-weight:600; font-size:12px; letter-spacing:0.22em; text-transform:uppercase; padding:16px 48px; border-radius:999px; opacity:{{ busyOpacity }};">{{ submitLabel }}</button>
+            <button type="button" onClick="{{ onBack }}" style="background:transparent; border:none; cursor:pointer; font-family:var(--font-body); font-size:13px; color:var(--olive); text-decoration:underline; text-underline-offset:3px;">Not you? Search again</button>
+          </div>
+        </form>
+      </sc-if>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer data-screen-label="footer" style="background:var(--olive); color:var(--paper); padding:clamp(80px,11vw,130px) var(--gutter) 52px; text-align:center;">
+    <div style="max-width:920px; margin:0 auto;">
+      <img src="assets/monogram.png" alt="Libby &amp; Josh" style="height:clamp(96px,11vw,132px); width:auto; margin:0 auto 26px; display:block; filter:brightness(0) invert(1); opacity:0.94;">
+      <p style="font-family:var(--font-display); font-style:italic; font-size:clamp(22px,2.6vw,32px); line-height:1.4; color:color-mix(in srgb, var(--paper) 88%, transparent); margin:0 auto; max-width:36ch;">With love and a little river water<br>Libby &amp; Josh</p>
+      <div style="display:flex; align-items:center; justify-content:center; gap:16px; margin:clamp(44px,6vw,72px) 0 0;">
+        <span style="flex:0 0 60px; height:1px; background:color-mix(in srgb, var(--paper) 30%, transparent);"></span>
+        <span style="letter-spacing:0.28em; text-transform:uppercase; font-size:11px; font-weight:600; color:color-mix(in srgb, var(--paper) 62%, transparent);">November 7, 2026 · Rio Frio, Texas</span>
+        <span style="flex:0 0 60px; height:1px; background:color-mix(in srgb, var(--paper) 30%, transparent);"></span>
+      </div>
+    </div>
+  </footer>
+
+
+  <style>
+    @media (max-width: 900px) {
+      .lj-navmobile { position: absolute !important; right: 16px; top: 0; bottom: 0; width: auto !important; }
+      .lj-navcrest { height: 72px !important; }
+      .lj-mphoto { aspect-ratio: 4 / 3 !important; }
+      .lj-mheader { padding-top: 120px !important; padding-bottom: 64px !important; }
+      .lj-navlinks { display: none !important; }
+      .lj-navmobile { display: flex !important; }
+      .lj-split, .lj-cards3, .lj-cards2, .lj-faq { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024}}">
+// ─── RSVP SERVICE ──────────────────────────────────────────────────────────
+// Paste the Apps Script web app /exec URL here once it's deployed
+// (the same URL that goes in the Config tab of the RSVP backend Sheet).
+// While this is empty the form runs in PREVIEW MODE with fictional sample data
+// and nothing is saved.
+const RSVP_API_URL = 'https://script.google.com/macros/s/AKfycbxC_HqwkuO5T0LOD02Hutou0sNrE8ut-lMH2ho1u3a1Uy7BPY9Cl9pAbeUKVVUhnO1o/exec';
+
+// Only event_1 and event_2 take RSVPs. event_3 (Sunday) and event_4 (Monday)
+// are public, informational events and never generate RSVP questions.
+const RSVP_EVENTS = [
+  { key: 'event_1', label: 'Friday · Welcome Party' },
+  { key: 'event_2', label: 'Saturday · The Wedding' }
+];
+
+// Fictional preview data, shaped exactly like the Apps Script "lookup" response.
+const PREVIEW_PARTIES = [
+  { party_id: 'PX01', display_name: 'The Sample Family', matched_guest_id: 'GX01', guests: [
+    { guest_id: 'GX01', first_name: 'Jane', last_name: 'Sample', full_name: 'Jane Sample', guest_type: 'named_guest', plus_one_of_guest_id: '', invited_to_event_1: 'Yes', invited_to_event_2: 'Yes' },
+    { guest_id: 'GX02', first_name: 'John', last_name: 'Sample', full_name: 'John Sample', guest_type: 'named_guest', plus_one_of_guest_id: '', invited_to_event_1: 'Yes', invited_to_event_2: 'Yes' },
+    { guest_id: 'GX03', first_name: 'Junie', last_name: 'Sample', full_name: 'Junie Sample', guest_type: 'child', plus_one_of_guest_id: '', invited_to_event_1: 'Yes', invited_to_event_2: 'Yes' }
+  ] },
+  { party_id: 'PX02', display_name: 'Alex Example & Guest', matched_guest_id: 'GX04', guests: [
+    { guest_id: 'GX04', first_name: 'Alex', last_name: 'Example', full_name: 'Alex Example', guest_type: 'named_guest', plus_one_of_guest_id: '', invited_to_event_1: 'No', invited_to_event_2: 'Yes' },
+    { guest_id: 'GX05', first_name: '', last_name: '', full_name: '', guest_type: 'open_plus_one', plus_one_of_guest_id: 'GX04', invited_to_event_1: 'No', invited_to_event_2: 'Yes' }
+  ] }
+];
+
+const norm = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim();
+const isYes = (v) => String(v).trim().toLowerCase() === 'yes' || v === true;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phoneOk = (p) => String(p || '').replace(/\D/g, '').length >= 10;
+
+const api = {
+  async lookup(name) {
+    if (!RSVP_API_URL) {
+      const q = norm(name);
+      return { ok: true, parties: PREVIEW_PARTIES.filter(p => p.guests.some(g => g.guest_type === 'named_guest' && norm(g.full_name) === q)) };
+    }
+    const r = await fetch(RSVP_API_URL + '?action=lookup&name=' + encodeURIComponent(name));
+    return r.json();
+  },
+  async submit(payload) {
+    if (!RSVP_API_URL) { console.log('[RSVP preview] would submit', payload); return { ok: true, preview: true }; }
+    // text/plain keeps this a "simple" request so Apps Script doesn't need a CORS preflight.
+    const r = await fetch(RSVP_API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: 'submit', ...payload }) });
+    return r.json();
+  }
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menuOpen: false, busy: false, submitted: false, guestName: '',
+      step: 'lookup', lookupValue: '', lookupError: '', matches: [], party: null,
+      form: {}, message: '', inviteError: '' };
+  }
+  componentDidMount() { this.syncBodyLock(); }
+  componentDidUpdate(prevProps, prevState) {
+    this.syncBodyLock();
+    if (prevState && prevState.step !== this.state.step && this.state.step !== 'lookup') this.scrollToForm();
+  }
+  scrollToForm() {
+    requestAnimationFrame(() => {
+      const sec = document.querySelector('[data-screen-label="rsvp form"]');
+      if (!sec) return;
+      // Target the invitation content itself (skipping the section's top padding).
+      const el = sec.querySelector('form, [data-rsvp-step]') || sec;
+      const nav = document.querySelector('nav');
+      const offset = (nav ? nav.getBoundingClientRect().height : 0) + 16;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      try { window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' }); } catch (e) { window.scrollTo(0, Math.max(0, top)); }
+    });
+  }
+  componentWillUnmount() { document.body.style.overflow = ''; }
+  syncBodyLock() { document.body.style.overflow = this.state.menuOpen ? 'hidden' : ''; }
+
+  async lookup(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const entered = this.state.lookupValue.trim();
+    if (norm(entered).split(' ').length < 2) return this.setState({ lookupError: 'Please enter both your first and last name.' });
+    this.setState({ busy: true, lookupError: '' });
+    try {
+      const res = await api.lookup(entered);
+      const parties = (res && res.ok && res.parties) || [];
+      if (!parties.length) return this.setState({ busy: false, lookupError: "We couldn't find that name. Try the spelling on your invitation, or reach out to Libby & Josh." });
+      if (parties.length === 1) return this.openParty(parties[0]);
+      this.setState({ busy: false, step: 'matches', matches: parties });
+    } catch (err) {
+      this.setState({ busy: false, lookupError: 'Something went wrong looking up your invitation. Please try again in a moment.' });
+    }
+  }
+  openParty(p) {
+    const form = {};
+    (p.guests || []).forEach(g => { form[g.guest_id] = { event_1: '', event_2: '', plus_one_first_name: '', plus_one_last_name: '', email: '', phone: '', dietary_notes: '' }; });
+    this.setState({ busy: false, step: 'invite', party: p, form, message: '', inviteError: '', lookupError: '' });
+  }
+  setField(id, k, v) { this.setState(s => ({ form: { ...s.form, [id]: { ...s.form[id], [k]: v } }, inviteError: '' })); }
+  invitedEvents(g) { return RSVP_EVENTS.filter(ev => isYes(g['invited_to_' + ev.key])); }
+
+  validate() {
+    const p = this.state.party;
+    for (const g of p.guests) {
+      const f = this.state.form[g.guest_id];
+      const evs = this.invitedEvents(g);
+      const who = g.guest_type === 'open_plus_one' ? 'your guest' : g.first_name;
+      if (evs.some(ev => !f[ev.key])) return 'Please choose accept or decline for ' + who + ' for each event.';
+      const attending = evs.some(ev => f[ev.key] === 'Yes');
+      if (g.guest_type === 'open_plus_one' && attending && (!f.plus_one_first_name.trim() || !f.plus_one_last_name.trim())) return "Please add your guest's first and last name.";
+      if (g.guest_type === 'named_guest') {
+        if (!EMAIL_RE.test(f.email.trim())) return 'Please enter a valid email for ' + g.first_name + '.';
+        if (!phoneOk(f.phone)) return 'Please enter a valid phone number for ' + g.first_name + '.';
+      }
+    }
+    return '';
+  }
+
+  async submitRsvp(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const p = this.state.party; if (!p || this.state.busy) return;
+    const err = this.validate();
+    if (err) return this.setState({ inviteError: err });
+    const noteOwner = p.guests.find(g => g.guest_id === p.matched_guest_id) || p.guests.find(g => g.guest_type === 'named_guest') || p.guests[0];
+    const payload = {
+      submitted_by_name_entered: this.state.lookupValue.trim(),
+      submitted_by_guest_id: p.matched_guest_id || '',
+      party_id: p.party_id,
+      responses: p.guests.map(g => {
+        const f = this.state.form[g.guest_id];
+        const named = g.guest_type === 'named_guest', plus = g.guest_type === 'open_plus_one';
+        return {
+          guest_id: g.guest_id,
+          guest_type: g.guest_type,
+          plus_one_first_name: plus ? f.plus_one_first_name.trim() : '',
+          plus_one_last_name: plus ? f.plus_one_last_name.trim() : '',
+          attending_event_1: isYes(g.invited_to_event_1) ? f.event_1 : '',
+          attending_event_2: isYes(g.invited_to_event_2) ? f.event_2 : '',
+          dietary_notes: f.dietary_notes.trim(),
+          guest_notes: g.guest_id === noteOwner.guest_id ? this.state.message.trim() : '',
+          email: named ? f.email.trim() : '',
+          phone: named ? f.phone.trim() : ''
+        };
+      })
+    };
+    this.setState({ busy: true });
+    try {
+      const res = await api.submit(payload);
+      if (!res || !res.ok) return this.setState({ busy: false, inviteError: (res && res.error) || 'We couldn\'t save your reply. Please try again.' });
+      this.setState({ busy: false, submitted: true, guestName: noteOwner.first_name || '' });
+      try { window.scrollTo({ top: 0 }); } catch (x) {}
+    } catch (x) {
+      this.setState({ busy: false, inviteError: "We couldn't reach the RSVP service. Please check your connection and try again." });
+    }
+  }
+
+  guestRows() {
+    const p = this.state.party; if (!p) return [];
+    const byId = Object.fromEntries(p.guests.map(g => [g.guest_id, g]));
+    return p.guests.map(g => {
+      const f = this.state.form[g.guest_id] || {};
+      const id = g.guest_id, plus = g.guest_type === 'open_plus_one';
+      const host = plus && byId[g.plus_one_of_guest_id];
+      const on = (k) => (e) => this.setField(id, k, e.target.value);
+      return {
+        showName: !plus, isPlus: plus,
+        name: g.full_name || ((g.first_name || '') + ' ' + (g.last_name || '')).trim(),
+        plusTitle: host ? host.first_name + '\u2019s guest' : 'Your guest',
+        plusFirst: f.plus_one_first_name || '', onPlusFirst: on('plus_one_first_name'),
+        plusLast: f.plus_one_last_name || '', onPlusLast: on('plus_one_last_name'),
+        needsContact: g.guest_type === 'named_guest',
+        email: f.email || '', onEmail: on('email'),
+        phone: f.phone || '', onPhone: on('phone'),
+        dietary: f.dietary_notes || '', onDietary: on('dietary_notes'),
+        events: this.invitedEvents(g).map(ev => {
+          const r = f[ev.key];
+          return { label: ev.label,
+            yesBg: r === 'Yes' ? 'var(--olive)' : 'transparent', yesColor: r === 'Yes' ? 'var(--paper)' : 'var(--olive)',
+            noBg: r === 'No' ? 'var(--olive)' : 'transparent', noColor: r === 'No' ? 'var(--paper)' : 'var(--olive)',
+            onYes: () => this.setField(id, ev.key, 'Yes'), onNo: () => this.setField(id, ev.key, 'No') };
+        })
+      };
+    });
+  }
+
+  renderVals() {
+    const s = this.state;
+    return {
+      menuOpen: s.menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      menuOpacity: s.menuOpen ? 1 : 0,
+      menuPointer: s.menuOpen ? 'auto' : 'none',
+      previewMode: !RSVP_API_URL && !s.submitted,
+      busy: s.busy, busyOpacity: s.busy ? 0.6 : 1,
+      lookupLabel: s.busy ? 'Searching…' : 'Find my invitation',
+      submitLabel: s.busy ? 'Sending…' : 'Send our reply',
+      submitted: s.submitted,
+      showLookup: !s.submitted && s.step === 'lookup',
+      showMatches: !s.submitted && s.step === 'matches',
+      showInvite: !s.submitted && s.step === 'invite',
+      lookupValue: s.lookupValue,
+      onLookupInput: (e) => this.setState({ lookupValue: e.target.value, lookupError: '' }),
+      onLookup: (e) => this.lookup(e),
+      lookupError: !!s.lookupError, lookupErrorText: s.lookupError,
+      matches: s.matches.map(p => ({ label: p.display_name, names: (p.guests || []).filter(g => g.guest_type !== 'open_plus_one').map(g => g.full_name).join(', '), onPick: () => this.openParty(p) })),
+      onBack: () => this.setState({ step: 'lookup', party: null, matches: [], inviteError: '' }),
+      partyLabel: s.party ? s.party.display_name : '',
+      guestRows: this.guestRows(),
+      onSubmit: (e) => this.submitRsvp(e),
+      message: s.message, onMessage: (e) => this.setState({ message: e.target.value }),
+      inviteError: !!s.inviteError, inviteErrorText: s.inviteError,
+      nameSuffix: s.guestName ? ', ' + s.guestName : ''
+    };
+  }
+}
+</script>
+</body>
+</html>
