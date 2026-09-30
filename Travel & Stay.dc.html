@@ -98,7 +98,8 @@
         <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(34px,4.4vw,54px); line-height:1.02; margin:0 0 22px; color:var(--olive);">Lodging at Rio Bella</h2>
         <p style="font-size:16px; line-height:1.9; margin:0 0 22px; color:var(--ink); max-width:52ch;">We&rsquo;ve already arranged lodging for our guests at Rio Bella and two nearby cabins operated by the venue. Give Analisa a call to find out where you&rsquo;ll be staying and get everything you need for your weekend accommodations.</p>
         <p style="font-family:var(--font-display); font-style:italic; font-size:20px; line-height:1.5; color:var(--ink); margin:0 0 30px;">For your lodging details, please contact Analisa, Rio Bella&rsquo;s Property Manager, below.</p>
-        <a href="tel:+18305918281" style="display:inline-block; background:var(--olive); color:var(--paper); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; padding:15px 40px; border-radius:999px;">Call Analisa</a>
+        <a href="tel:+18305918281" style="display:inline-block; background:var(--olive); color:var(--paper); text-decoration:none; font-family:var(--font-body); font-weight:600; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; padding:15px 40px; border-radius:999px;" onClick="{{ callAnalisa }}">Call Analisa</a>
+        <div style="display:{{ phoneDisplay }}; margin-top:16px; font-family:var(--font-body); font-size:16px; letter-spacing:0.08em;"><a href="tel:+18305918281" style="color:var(--ink); text-decoration:none; border-bottom:1px solid color-mix(in srgb,var(--ink) 40%,transparent);">(830) 591-8281</a></div>
       </div>
     </div>
   </section>
@@ -196,7 +197,7 @@
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { menuOpen: false };
+    this.state = { menuOpen: false, phoneShown: false };
   }
 
   componentDidMount() { this.syncBodyLock(); }
@@ -213,7 +214,15 @@ class Component extends DCLogic {
       openMenu: () => this.setState({ menuOpen: true }),
       closeMenu: () => this.setState({ menuOpen: false }),
       menuOpacity: this.state.menuOpen ? 1 : 0,
-      menuPointer: this.state.menuOpen ? 'auto' : 'none'
+      menuPointer: this.state.menuOpen ? 'auto' : 'none',
+      phoneDisplay: this.state.phoneShown ? 'block' : 'none',
+      callAnalisa: (e) => {
+        // Mouse/trackpad devices reveal the number; phones/tablets keep the tel: link behavior.
+        const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        if (!isDesktop) return;
+        if (e && e.preventDefault) e.preventDefault();
+        this.setState({ phoneShown: true });
+      }
     };
   }
 }
